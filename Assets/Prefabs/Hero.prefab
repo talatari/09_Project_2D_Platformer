@@ -68,7 +68,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 8b446199339754731b4a0d438c54f1a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -300,9 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428b62269fcaa40afb9bb14362efa33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 10
   _jumpForce: 12
-  _playerAnimator: {fileID: 389528975285578336}
 --- !u!114 &389528975285578336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,5 +314,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba00b6d2ef5f745079eece2560a4e97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 8200667540295869333}
-  _animator: {fileID: 2860170343883208558}
