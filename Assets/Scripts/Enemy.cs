@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
             StopCoroutine(_coroutinePatrol);
         }
     }
-
+    
+    // Как избавиться от дубляжа в корутине?
     private IEnumerator Patrol()
     {
         while (true)

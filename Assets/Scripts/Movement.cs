@@ -57,4 +57,6 @@ public class Movement : MonoBehaviour
             _rigidbody2D.AddForce((Vector2)transform.up * _jumpForce, ForceMode2D.Impulse);
         }
     }
+    
+    
 }

@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private void Start()
-    {
-        
-    }
+    private int _coinsCollected;
 
-    private void Update()
+    public void CollectedCoin()
     {
+        _coinsCollected++;
         
+        print($"_coinsCollected = {_coinsCollected}");
     }
+    
+    
 }

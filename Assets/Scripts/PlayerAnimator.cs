@@ -11,17 +11,9 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Start() => _animator = GetComponent<Animator>();
 
-    public void PlayRunAnimation(float speed)
-    {
-        if (Math.Abs(speed) > 0)
-        {
-            _animator.SetBool(_run, true);
-        }
-        else
-        {
-            _animator.SetBool(_run, false);
-        }
-    }
+    public void PlayRunAnimation(float speed) => _animator.SetBool(_run, Math.Abs(speed) > 0);
 
     public void PlayJumpAnimation() => _animator.SetTrigger(_jump);
+    
+    
 }
