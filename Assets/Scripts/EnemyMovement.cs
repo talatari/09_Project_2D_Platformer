@@ -1,16 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speedMove = 2f;
-    [SerializeField] private float _timeMove = 5f;
-    [SerializeField] private float _timeIdle = 2f;
-    
+
+    private Animator _animator;
+    private float _timeMove;
+    private float _timeIdle;
+    private float _directionMove = 1f;
     private Coroutine _coroutinePatrol;
-    private float _timer;
     
     private void Start() => _coroutinePatrol = StartCoroutine(Patrol());
+
+    private void OnValidate() => _animator ??= GetComponent<Animator>();
 
     private void OnDisable()
     {
@@ -20,33 +23,33 @@ public class Enemy : MonoBehaviour
         }
     }
     
-    // Как избавиться от дубляжа в корутине?
     private IEnumerator Patrol()
     {
         while (true)
         {
-            _timer = 0;
+            _timeMove = 5f;
+            _timeIdle = 2f;
+            _directionMove *= -1;
+            _animator.SetBool("isMoving", true);
             
-            while (_timer <= _timeMove)
+            while (_timeMove > 0)
             {
-                transform.position = new Vector3(transform.position.x + _speedMove * Time.deltaTime, 
+                transform.position = new Vector3(transform.position.x + _speedMove * _directionMove * Time.deltaTime, 
                                                  transform.position.y, transform.position.z);
-                
-                _timer += Time.deltaTime;
+
+                _timeMove -= Time.deltaTime;
                 
                 yield return null;
             }
             
-            _timer = 0;
-            
-            while (_timer <= _timeIdle)
+            _animator.SetBool("isMoving", false);
+
+            while (_timeIdle > 0)
             {
-                _timer += Time.deltaTime;
-                
+                _timeIdle -= Time.deltaTime;
+
                 yield return null;
             }
-            
-            _speedMove *= -1;
         }
     }
     
