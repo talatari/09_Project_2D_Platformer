@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class PlayerAnimator : MonoBehaviour
     private readonly string _jump = "Jump";
     private readonly string _run = "Run";
 
-    private void Start() => _animator = GetComponent<Animator>();
+    private void OnValidate() => _animator ??= GetComponent<Animator>();
 
     public void PlayRunAnimation(float speed) => _animator.SetBool(_run, Math.Abs(speed) > 0);
 

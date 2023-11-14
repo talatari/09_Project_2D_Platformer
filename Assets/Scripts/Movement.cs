@@ -13,11 +13,11 @@ public class Movement : MonoBehaviour
     private PlayerAnimator _playerAnimator;
     private float _horizontalMove;
 
-    private void Start()
+    private void OnValidate()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerAnimator = GetComponent<PlayerAnimator>();
+        _rigidbody2D ??= GetComponent<Rigidbody2D>();
+        _spriteRenderer ??= GetComponent<SpriteRenderer>();
+        _playerAnimator ??= GetComponent<PlayerAnimator>();
     }
 
     private void Update()
