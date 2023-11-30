@@ -8,8 +8,9 @@ public class Enemy : MonoBehaviour
     private Player _target;
     private EnemyPatrol _enemyPatrol;
     private EnemyDetector _enemyDetector;
+    private EnemyMover _enemyMover;
     private Animator _animator;
-    private int _damage = 10;
+    private int _damage = 3;
 
     public event Action EnemyDestroy;
 
@@ -17,21 +18,24 @@ public class Enemy : MonoBehaviour
     {
         _enemyPatrol = GetComponent<EnemyPatrol>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
+        _enemyMover = GetComponent<EnemyMover>();
     }
 
     private void OnEnable()
     {
-        _enemyDetector.PlayerClose += OnAttack;
+        _enemyDetector.PlayerDetected += OnMoveTarget;
+        _enemyMover.PlayerClose += OnAttack;
     }
 
     private void OnDisable()
     {
-        _enemyDetector.PlayerClose -= OnAttack;
+        _enemyDetector.PlayerDetected -= OnMoveTarget;
+        _enemyMover.PlayerClose -= OnAttack;
     }
 
     public void Take(int damage)
     {
-        print($"Current enemy health: {_health}, damage by: -{damage}");
+        print($"Current Enemy health: {_health}, damage by: -{damage}");
         
         _health -= damage;
 
@@ -42,18 +46,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Attack(Player player) => 
-        player.Take(_damage);
-
-    private void OnAttack(Player player)
+    public void OnAttack()
     {
-        
+        if (_target is not null)
+        {
+            _target.Take(_damage);
+        }
+    }
 
+    private void OnMoveTarget(Player player)
+    {
         if (_target is null)
         {
             _target = player;
             _enemyPatrol.StopPatrol();
         }
-            
+
+        _enemyMover.SetTarget(player);
     }
 }

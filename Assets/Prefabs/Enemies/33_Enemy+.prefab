@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 8824457447788350282}
   - component: {fileID: 1648118037224827704}
   - component: {fileID: 201703320753395086}
-  - component: {fileID: 2528401956809577270}
+  - component: {fileID: 7084826138277712862}
   m_Layer: 0
   m_Name: 33_Enemy+
   m_TagString: Untagged
@@ -237,7 +237,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 7.135683
+  m_Mass: 5.152158
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -252,8 +252,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2528401956809577270
-BoxCollider2D:
+--- !u!70 &7084826138277712862
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -284,19 +284,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06383228, y: 0.35817575}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.510664, y: 2.0993514}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.11635407, y: 0.37233257}
+  m_Size: {x: 1.2912078, y: 2.0505111}
+  m_Direction: 0
 --- !u!1 &7678019587980170817
 GameObject:
   m_ObjectHideFlags: 0

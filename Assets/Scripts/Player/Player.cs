@@ -39,8 +39,12 @@ public class Player : MonoBehaviour
         _health += health;
     }
 
-    public void Take(int damage) => 
+    public void Take(int damage)
+    {
+        print($"Current Player health: {_health}, damage by: -{damage}");
+        
         _health -= damage;
+    }
 
     private void OnAttack(Enemy enemy)
     {

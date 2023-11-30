@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
-    public event Action<Player> PlayerClose;
+    public event Action<Player> PlayerDetected;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.TryGetComponent(out Player player))
-            PlayerClose?.Invoke(player);
+        if (other.TryGetComponent(out Player player))
+            PlayerDetected?.Invoke(player);
     }
 }

@@ -5,14 +5,14 @@ public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] private float _speedMove = 2f;
 
-    private Animator _animator;
+    private EnemyAnimator _enemyAnimator;
     private float _timeMove;
     private float _timeIdle;
     private float _directionMove = 1f;
     private Coroutine _coroutinePatrol;
     
     private void Awake() => 
-        _animator = GetComponentInChildren<Animator>();
+        _enemyAnimator = GetComponentInChildren<EnemyAnimator>();
 
     private void Start() => 
         _coroutinePatrol = StartCoroutine(Patrol());
@@ -28,14 +28,12 @@ public class EnemyPatrol : MonoBehaviour
     
     private IEnumerator Patrol()
     {
-        string isMovingText = "isMoving";
-        
         while (true)
         {
             _timeMove = 5f;
             _timeIdle = 2f;
             _directionMove *= -1;
-            _animator.SetBool(isMovingText, true);
+            _enemyAnimator.Move();
             
             while (_timeMove > 0)
             {
@@ -49,7 +47,9 @@ public class EnemyPatrol : MonoBehaviour
                 yield return null;
             }
             
-            _animator.SetBool(isMovingText, false);
+            _enemyAnimator.Idle();
+            
+            _enemyAnimator.Flip();
 
             while (_timeIdle > 0)
             {
