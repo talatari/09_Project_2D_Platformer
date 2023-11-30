@@ -4,13 +4,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
+    [SerializeField] private int _damage = 7;
 
     private PlayerAnimator _playerAnimator;
     private PlayerDetector _playerDetector;
     private Enemy _currentTarget;
     private int _coinsCollected;
-    private int _damage = 5;
-    
+
     public event Action PlayerDestroy;
 
     private void Awake()

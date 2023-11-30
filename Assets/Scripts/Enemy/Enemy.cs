@@ -4,13 +4,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
+    [SerializeField] private int _damage = 3;
 
     private Player _currentTarget;
     private EnemyMover _enemyMover;
     private EnemyPatrol _enemyPatrol;
     private EnemyDetector _enemyDetector;
     private EnemyAnimator _enemyAnimator;
-    private int _damage = 3;
 
     public event Action EnemyDestroy;
 
