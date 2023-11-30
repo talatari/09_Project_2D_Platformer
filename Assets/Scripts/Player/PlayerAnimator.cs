@@ -3,36 +3,29 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
+    private static readonly int _runNameParameter = Animator.StringToHash("Run");
+    private static readonly int _jumpNameParameter = Animator.StringToHash("Jump");
+    private static readonly int _attackNameParameter = Animator.StringToHash("Attack");
+
     private Animator _animator;
+    
+    public event Action AttackAnimationEnd;
 
     private void Awake() => 
         _animator = GetComponent<Animator>();
 
-    public void PlayRunAnimation(float speed)
-    {
-        string run = "Run";
-        
-        _animator.SetBool(run, Math.Abs(speed) > 0);
-    }
+    public void PlayRunAnimation(float speed) => 
+        _animator.SetBool(_runNameParameter, Math.Abs(speed) > 0);
 
-    public void PlayJumpAnimation()
-    {
-        string jump = "Jump";
+    public void PlayJumpAnimation() => 
+        _animator.SetTrigger(_jumpNameParameter);
 
-        _animator.SetTrigger(jump);
-    }
+    public void PlayAttackAnimation() => 
+        _animator.SetBool(_attackNameParameter, true);
 
-    public void PlayAttackAnimation()
-    {
-        string attack = "Attack";
-        
-        _animator.SetBool(attack, true);
-    }
-
-    public void StopAttackAnimation()
-    {
-        string attack = "Attack";
-        
-        _animator.SetBool(attack, false);
-    }
+    public void StopAttackAnimation() => 
+        _animator.SetBool(_attackNameParameter, false);
+    
+    public void AttackAnimationEnded() => 
+        AttackAnimationEnd?.Invoke();
 }

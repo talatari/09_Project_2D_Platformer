@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -6,16 +7,22 @@ public class Enemy : MonoBehaviour
 
     private Player _target;
     private int _damage = 10;
+
+    public event Action EnemyDestroy;
     
     private void Attack(Player player) => 
         player.Take(_damage);
 
     public void Take(int damage)
     {
-        _health -= damage;
-        print(_health);
+        print($"Current enemy health: {_health}, damage by: -{damage}");
         
-        if (_health < 0)
+        _health -= damage;
+
+        if (_health <= 0)
+        {
+            EnemyDestroy?.Invoke();
             Destroy(gameObject);
+        }
     }
 }

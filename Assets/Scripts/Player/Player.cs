@@ -6,8 +6,9 @@ public class Player : MonoBehaviour
 
     private PlayerAnimator _playerAnimator;
     private PlayerDetector _playerDetector;
+    private Enemy _currentTarget;
     private int _coinsCollected;
-    private int _damage = 2;
+    private int _damage = 5;
 
     private void Awake()
     {
@@ -17,12 +18,14 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        _playerAnimator.AttackAnimationEnd += OnTakeDamage;
         _playerDetector.EnemyClose += OnAttack;
         _playerDetector.EnemyFar += OnIdle;
     }
 
     private void OnDisable()
     {
+        _playerAnimator.AttackAnimationEnd -= OnTakeDamage;
         _playerDetector.EnemyClose -= OnAttack;
         _playerDetector.EnemyFar -= OnIdle;
     }
@@ -36,22 +39,35 @@ public class Player : MonoBehaviour
         _health += health;
     }
 
-    private void OnAttack(Enemy enemy)
-    {
-        if (enemy != null)
-        {
-            enemy.Take(_damage);
-            _playerAnimator.PlayAttackAnimation();
-        }
-        else
-        {
-            OnIdle();
-        }
-    }
-
     public void Take(int damage) => 
         _health -= damage;
 
+    private void OnAttack(Enemy enemy)
+    {
+        _playerAnimator.PlayAttackAnimation();
+
+        if (_currentTarget is null)
+        {
+            _currentTarget = enemy;
+            _currentTarget.EnemyDestroy += OnTargetClear;
+        }
+
+        if (_currentTarget.Equals(enemy))
+            _currentTarget = enemy;
+    }
+
+    private void OnTakeDamage()
+    {
+        if (_currentTarget is not null)
+            _currentTarget.Take(_damage);
+    }
+
     private void OnIdle() => 
         _playerAnimator.StopAttackAnimation();
+
+    private void OnTargetClear()
+    {
+        _currentTarget.EnemyDestroy -= OnTargetClear;
+        _currentTarget = null;
+    }
 }
