@@ -38,10 +38,14 @@ public class Player : MonoBehaviour
 
     private void OnAttack(Enemy enemy)
     {
-        while (enemy != null)
+        if (enemy != null)
         {
             enemy.Take(_damage);
             _playerAnimator.PlayAttackAnimation();
+        }
+        else
+        {
+            OnIdle();
         }
     }
 
