@@ -177,17 +177,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1963735634625442501, guid: 9c3277a5028544766a36446274699960, type: 3}
-      propertyPath: m_Radius
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 5863236371216174422, guid: 9c3277a5028544766a36446274699960, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.94763
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 5863236371216174422, guid: 9c3277a5028544766a36446274699960, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.342751
+      value: 7.88
       objectReference: {fileID: 0}
     - target: {fileID: 5863236371216174422, guid: 9c3277a5028544766a36446274699960, type: 3}
       propertyPath: m_LocalPosition.z
@@ -295,21 +291,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6798100219927087063, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
-      propertyPath: m_Radius
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406856, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_Name
       value: 57_Enemy+
       objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406859, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.980152
+      value: -27.38
       objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406859, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.952391
+      value: -7.59
       objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406859, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_LocalPosition.z

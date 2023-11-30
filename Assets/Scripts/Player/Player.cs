@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _playerAnimator = GetComponent<PlayerAnimator>();
-        _playerDetector = GetComponent<PlayerDetector>();
+        _playerAnimator = GetComponentInChildren<PlayerAnimator>();
+        _playerDetector = GetComponentInChildren<PlayerDetector>();
     }
 
     private void OnEnable()

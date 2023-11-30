@@ -12,17 +12,18 @@ public class EnemyPatrol : MonoBehaviour
     private Coroutine _coroutinePatrol;
     
     private void Awake() => 
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
 
     private void Start() => 
         _coroutinePatrol = StartCoroutine(Patrol());
 
-    private void OnDisable()
+    private void OnDisable() => 
+        StopPatrol();
+
+    public void StopPatrol()
     {
         if (_coroutinePatrol != null)
-        {
             StopCoroutine(_coroutinePatrol);
-        }
     }
     
     private IEnumerator Patrol()

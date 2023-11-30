@@ -13,8 +13,8 @@ public class PlayerMover : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _playerAnimator = GetComponent<PlayerAnimator>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _playerAnimator = GetComponentInChildren<PlayerAnimator>();
     }
 
     private void Update()
