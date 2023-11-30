@@ -5,32 +5,37 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
 
-    private Player _target;
+    private Player _currentTarget;
+    private EnemyMover _enemyMover;
     private EnemyPatrol _enemyPatrol;
     private EnemyDetector _enemyDetector;
-    private EnemyMover _enemyMover;
-    private Animator _animator;
+    private EnemyAnimator _enemyAnimator;
     private int _damage = 3;
 
     public event Action EnemyDestroy;
 
     private void Awake()
     {
+        _enemyMover = GetComponent<EnemyMover>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
-        _enemyMover = GetComponent<EnemyMover>();
+        _enemyAnimator = GetComponentInChildren<EnemyAnimator>();
     }
 
     private void OnEnable()
     {
-        _enemyDetector.PlayerDetected += OnMoveTarget;
         _enemyMover.PlayerClose += OnAttack;
+        _enemyDetector.PlayerDetected += OnMoveTarget;
+        _enemyDetector.PlayerFar += OnIdle;
+        _enemyAnimator.AttackAnimationEnd += OnTakeDamage;
     }
 
     private void OnDisable()
     {
-        _enemyDetector.PlayerDetected -= OnMoveTarget;
         _enemyMover.PlayerClose -= OnAttack;
+        _enemyDetector.PlayerDetected -= OnMoveTarget;
+        _enemyDetector.PlayerFar -= OnIdle;
+        _enemyAnimator.AttackAnimationEnd -= OnTakeDamage;
     }
 
     public void Take(int damage)
@@ -46,19 +51,42 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnAttack()
+    public void OnAttack(Player player)
     {
-        if (_target is not null)
+        _enemyAnimator.StopMove();
+        
+        _enemyAnimator.PlayAttackAnimation();
+
+        if (_currentTarget is null)
         {
-            _target.Take(_damage);
+            _currentTarget = player;
+            _currentTarget.PlayerDestroy += OnTargetClear;
         }
+
+        if (_currentTarget.Equals(player))
+            _currentTarget = player;
+    }
+
+    private void OnTakeDamage()
+    {
+        if (_currentTarget is not null)
+            _currentTarget.Take(_damage);
+    }
+    
+    private void OnIdle() => 
+        _enemyAnimator.StopAttackAnimation();
+
+    private void OnTargetClear()
+    {
+        _currentTarget.PlayerDestroy -= OnTargetClear;
+        _currentTarget = null;
     }
 
     private void OnMoveTarget(Player player)
     {
-        if (_target is null)
+        if (_currentTarget is null)
         {
-            _target = player;
+            _currentTarget = player;
             _enemyPatrol.StopPatrol();
         }
 

@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-    private static readonly int _isMoving = Animator.StringToHash("isMoving");
+    private static readonly int _moveNameParameter = Animator.StringToHash("Move");
+    private static readonly int _attackNameParameter = Animator.StringToHash("Attack");
 
     private Animator _animator;
     private SpriteRenderer[] _spriteRenderers;
+    
+    public event Action AttackAnimationEnd;
 
     private void Awake()
     {
@@ -13,15 +17,11 @@ public class EnemyAnimator : MonoBehaviour
         _spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
-    public void Move()
-    {
-        _animator.SetBool(_isMoving, true);
-    }
+    public void Move() => 
+        _animator.SetBool(_moveNameParameter, true);
 
-    public void Idle()
-    {
-        _animator.SetBool(_isMoving, false);
-    }
+    public void StopMove() => 
+        _animator.SetBool(_moveNameParameter, false);
 
     public void Flip()
     {
@@ -31,4 +31,13 @@ public class EnemyAnimator : MonoBehaviour
             else
                 spriteRenderer.flipX = true;
     }
+
+    public void PlayAttackAnimation() => 
+        _animator.SetBool(_attackNameParameter, true);
+
+    public void StopAttackAnimation() => 
+        _animator.SetBool(_attackNameParameter, false);
+    
+    public void AttackAnimationEnded() => 
+        AttackAnimationEnd?.Invoke();
 }

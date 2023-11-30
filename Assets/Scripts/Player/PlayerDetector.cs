@@ -18,5 +18,5 @@ public class PlayerDetector : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy enemy))
             EnemyFar?.Invoke();
-    } 
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,6 +10,8 @@ public class Player : MonoBehaviour
     private Enemy _currentTarget;
     private int _coinsCollected;
     private int _damage = 5;
+    
+    public event Action PlayerDestroy;
 
     private void Awake()
     {
@@ -44,6 +47,12 @@ public class Player : MonoBehaviour
         print($"Current Player health: {_health}, damage by: -{damage}");
         
         _health -= damage;
+        
+        if (_health <= 0)
+        {
+            PlayerDestroy?.Invoke();
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnAttack(Enemy enemy)

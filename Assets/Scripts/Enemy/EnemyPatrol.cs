@@ -47,7 +47,7 @@ public class EnemyPatrol : MonoBehaviour
                 yield return null;
             }
             
-            _enemyAnimator.Idle();
+            _enemyAnimator.StopMove();
             
             _enemyAnimator.Flip();
 
