@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 593107323}
   - component: {fileID: 593107324}
   m_Layer: 0
-  m_Name: SpawnerCoin
+  m_Name: Spawner+
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad15b1c751d34423bd0645381246bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabCoin: {fileID: 1311900988215588809, guid: d30743dbca4934fcab15cbb3f899b0b4, type: 3}
-  _waitTime: 3
+  _aidKit: {fileID: 5947332797461300981, guid: afde5beecd81e4476b9c925ec7a6a41d, type: 3}
+  _waitTime: 5
 --- !u!1001 &1044444884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863236371216174423, guid: 9c3277a5028544766a36446274699960, type: 3}
       propertyPath: m_Name
-      value: 68_Enemy
+      value: 68_Enemy+
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -276,11 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7678019587676606898, guid: f72bd9fc9b29e4c19a32bbbd7052abd0, type: 3}
       propertyPath: m_Name
-      value: 33_Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 7678019588325785013, guid: f72bd9fc9b29e4c19a32bbbd7052abd0, type: 3}
-      propertyPath: m_FlipX
-      value: 0
+      value: 33_Enemy+
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -295,21 +291,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7593141305554786407, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593141305722937486, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7593141306659090324, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406856, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_Name
-      value: 57_Enemy
+      value: 57_Enemy+
       objectReference: {fileID: 0}
     - target: {fileID: 7593141306827406859, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -351,10 +335,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7593141306840776652, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -368,14 +348,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3365730313574575920, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: orthographic size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5204303509718675577, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6902751967863519054, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -416,9 +388,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7068385808551179084, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7332351833803817105, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player+
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
