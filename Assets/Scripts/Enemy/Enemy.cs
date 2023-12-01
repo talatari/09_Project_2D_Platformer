@@ -4,8 +4,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
-    [SerializeField] private int _damage = 3;
-
+    [SerializeField] private int _damage = 6;
+    [SerializeField] private Coin _coinPrefab;
+    
     private Player _currentTarget;
     private EnemyMover _enemyMover;
     private EnemyPatrol _enemyPatrol;
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour
 
         if (_health <= 0)
         {
+            Instantiate(_coinPrefab, transform.position, Quaternion.identity);
             EnemyDestroy?.Invoke();
             Destroy(gameObject);
         }

@@ -373,6 +373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
+  _damage: 6
+  _coinPrefab: {fileID: 1311900988215588809, guid: d30743dbca4934fcab15cbb3f899b0b4, type: 3}
 --- !u!114 &4157297317284106143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403006767367c41aa95822f6f8b30a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 6
 --- !u!50 &4978770085926146571
 Rigidbody2D:
   serializedVersion: 4

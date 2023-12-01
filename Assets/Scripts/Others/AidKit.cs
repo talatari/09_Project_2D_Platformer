@@ -3,19 +3,19 @@ using UnityEngine;
 public class AidKit : MonoBehaviour
 {
     private int _health;
-    
+
+    public int Health => _health;
+
     private void Start()
     {
-        _health = Random.Range(5, 25);
-        Destroy(gameObject, 10f);
+        int minHealth = 5;
+        int maxHealth = 25;
+        float selfDestroyDelay = 10f;
+        
+        _health = Random.Range(minHealth, maxHealth);
+        Destroy(gameObject, selfDestroyDelay);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision2D)
-    {
-        if (collision2D.transform.TryGetComponent(out Player player))
-        {
-            player.CollectedAidKit(_health);
-            Destroy(gameObject);
-        }
-    }
+    public void Destoy() => 
+        Destroy(gameObject);
 }

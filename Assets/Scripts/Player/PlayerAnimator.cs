@@ -20,10 +20,10 @@ public class PlayerAnimator : MonoBehaviour
     public void PlayJumpAnimation() => 
         _animator.SetTrigger(_jumpNameParameter);
 
-    public void PlayAttackAnimation() => 
+    public void StartAttack() => 
         _animator.SetBool(_attackNameParameter, true);
 
-    public void StopAttackAnimation() => 
+    public void StopAttack() => 
         _animator.SetBool(_attackNameParameter, false);
     
     public void AttackAnimationEnded() => 

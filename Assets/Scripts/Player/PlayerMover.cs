@@ -37,13 +37,9 @@ public class PlayerMover : MonoBehaviour
     private void Fliping()
     {
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
             _spriteRenderer.flipX = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
             _spriteRenderer.flipX = false;
-        }
     }
 
     private void TryJump()
