@@ -9,10 +9,9 @@ public class Player : MonoBehaviour
     private Enemy _currentTarget;
     private EnemyHealth _enemyHealth;
 
-    public event Action<int> PlayerHealthed;
     public event Action<Enemy> PlayerGiveDamage;
     public event Action<int> PlayerTakeDamage;
-    public event Action PlayerDestroy;
+    public event Action<int> PlayerHealthed;
 
     private void Awake()
     {
