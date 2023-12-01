@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyCoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;

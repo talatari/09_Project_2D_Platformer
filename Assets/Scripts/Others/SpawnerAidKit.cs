@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class SpawnerAidKit : MonoBehaviour
 {
-    [SerializeField] private AidKit _aidKit;
+    [SerializeField] private AidKit _aidKitPrefab;
     [SerializeField] private float _waitTime;
 
     private Coroutine _coroutineSpawn;
@@ -21,14 +21,12 @@ public class Spawner : MonoBehaviour
     {
         int positionX = 30;
         int positionY = 15;
-        
         WaitForSeconds waitTime = new WaitForSeconds(_waitTime);
         
         while (true)
         {
             Vector3 randomSpawnPoint = new Vector3(Random.Range(positionX * -1 , positionX), positionY, 0);
-            
-            Instantiate(_aidKit, randomSpawnPoint, Quaternion.identity);
+            Instantiate(_aidKitPrefab, randomSpawnPoint, Quaternion.identity);
             
             yield return waitTime;
         }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class EnemyAnimator : MonoBehaviour
 {
     private static readonly int _moveNameParameter = Animator.StringToHash("Move");

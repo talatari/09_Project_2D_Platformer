@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
     private static readonly int _runNameParameter = Animator.StringToHash("Run");

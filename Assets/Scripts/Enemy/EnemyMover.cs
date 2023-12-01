@@ -7,6 +7,7 @@ public class EnemyMover : MonoBehaviour
     
     private Player _player;
     private Vector3 _target;
+    private float _minDistance = 3f;
 
     public event Action<Player> PlayerClose;
 
@@ -15,10 +16,9 @@ public class EnemyMover : MonoBehaviour
         if (_player is not null)
         {
             _target = _player.transform.position;
-            
             transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
             
-            if ((transform.position - _target).magnitude < 3f)
+            if ((transform.position - _target).magnitude < _minDistance)
                 PlayerClose?.Invoke(_player);
         }
     }

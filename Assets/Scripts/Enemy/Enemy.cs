@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyMover), typeof(EnemyPatrol), typeof(EnemyHealth))]
 public class Enemy : MonoBehaviour
 {
     private Player _currentTarget;
@@ -25,20 +26,20 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemyAnimator.AttackAnimationEnd += OnGiveDamage;
         _enemyMover.PlayerClose += OnSelectTarget;
+        _enemyHealth.EnemyDestroy += OnDestroy;
         _enemyDetector.PlayerDetected += OnMoveTarget;
         _enemyDetector.PlayerFar += OnIdle;
-        _enemyHealth.EnemyDestroy += OnDestroy;
+        _enemyAnimator.AttackAnimationEnd += OnGiveDamage;
     }
 
     private void OnDisable()
     {
-        _enemyAnimator.AttackAnimationEnd -= OnGiveDamage;
         _enemyMover.PlayerClose -= OnSelectTarget;
+        _enemyHealth.EnemyDestroy -= OnDestroy;
         _enemyDetector.PlayerDetected -= OnMoveTarget;
         _enemyDetector.PlayerFar -= OnIdle;
-        _enemyHealth.EnemyDestroy -= OnDestroy;
+        _enemyAnimator.AttackAnimationEnd -= OnGiveDamage;
     }
 
     private void OnDestroy() => 

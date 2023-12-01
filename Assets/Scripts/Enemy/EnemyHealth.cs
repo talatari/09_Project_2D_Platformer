@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int _health = 100;
@@ -21,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
     private void OnTake(int damage)
     {
         print($"Current Enemy health: {_health}, damage by: -{damage}");
-        
         _health -= damage;
 
         if (_health <= 0)

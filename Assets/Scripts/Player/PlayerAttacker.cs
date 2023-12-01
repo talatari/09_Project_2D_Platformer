@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Player))]
 public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] private int _damage = 14;

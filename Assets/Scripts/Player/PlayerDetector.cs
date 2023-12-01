@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
-
 public class PlayerDetector : MonoBehaviour
 {
     public event Action<Enemy> EnemyClose;
