@@ -32,10 +32,10 @@ public class EnemyAnimator : MonoBehaviour
                 spriteRenderer.flipX = true;
     }
 
-    public void PlayAttackAnimation() => 
+    public void PlayAttack() => 
         _animator.SetBool(_attackNameParameter, true);
 
-    public void StopAttackAnimation() => 
+    public void StopAttack() => 
         _animator.SetBool(_attackNameParameter, false);
     
     public void AttackAnimationEnded() => 

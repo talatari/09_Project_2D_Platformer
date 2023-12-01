@@ -3,85 +3,85 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health = 100;
-    [SerializeField] private int _damage = 6;
-    [SerializeField] private Coin _coinPrefab;
-    
     private Player _currentTarget;
+    private PlayerHealth _playerHealth;
     private EnemyMover _enemyMover;
     private EnemyPatrol _enemyPatrol;
     private EnemyDetector _enemyDetector;
     private EnemyAnimator _enemyAnimator;
+    private EnemyHealth _enemyHealth;
 
-    public event Action EnemyDestroy;
+    public event Action<Player> EnemyGiveDame;
+    public event Action<int> EnemyTakeDamage;
 
     private void Awake()
     {
         _enemyMover = GetComponent<EnemyMover>();
         _enemyPatrol = GetComponent<EnemyPatrol>();
+        _enemyHealth = GetComponent<EnemyHealth>();
         _enemyDetector = GetComponentInChildren<EnemyDetector>();
         _enemyAnimator = GetComponentInChildren<EnemyAnimator>();
     }
 
     private void OnEnable()
     {
-        _enemyMover.PlayerClose += OnAttack;
+        _enemyAnimator.AttackAnimationEnd += OnGiveDamage;
+        _enemyMover.PlayerClose += OnSelectTarget;
         _enemyDetector.PlayerDetected += OnMoveTarget;
         _enemyDetector.PlayerFar += OnIdle;
-        _enemyAnimator.AttackAnimationEnd += OnTakeDamage;
+        _enemyHealth.EnemyDestroy += OnDestroy;
     }
 
     private void OnDisable()
     {
-        _enemyMover.PlayerClose -= OnAttack;
+        _enemyAnimator.AttackAnimationEnd -= OnGiveDamage;
+        _enemyMover.PlayerClose -= OnSelectTarget;
         _enemyDetector.PlayerDetected -= OnMoveTarget;
         _enemyDetector.PlayerFar -= OnIdle;
-        _enemyAnimator.AttackAnimationEnd -= OnTakeDamage;
+        _enemyHealth.EnemyDestroy -= OnDestroy;
     }
 
-    public void Take(int damage)
-    {
-        print($"Current Enemy health: {_health}, damage by: -{damage}");
-        
-        _health -= damage;
+    private void OnDestroy() => 
+        Destroy(gameObject);
 
-        if (_health <= 0)
-        {
-            Instantiate(_coinPrefab, transform.position, Quaternion.identity);
-            EnemyDestroy?.Invoke();
-            Destroy(gameObject);
-        }
-    }
+    public void Take(int damage) => 
+        EnemyTakeDamage?.Invoke(damage);
 
-    public void OnAttack(Player player)
+    public void OnSelectTarget(Player player)
     {
         _enemyAnimator.StopMove();
         
-        _enemyAnimator.PlayAttackAnimation();
+        _enemyAnimator.PlayAttack();
 
         if (_currentTarget is null)
         {
             _currentTarget = player;
-            _currentTarget.PlayerDestroy += OnTargetClear;
+
+            if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
+            {
+                _playerHealth = playerHealth;
+                _playerHealth.PlayerDestroy += OnClearTarget;
+            }
         }
 
         if (_currentTarget.Equals(player))
             _currentTarget = player;
     }
 
-    private void OnTakeDamage()
-    {
-        if (_currentTarget is not null)
-            _currentTarget.Take(_damage);
-    }
-    
-    private void OnIdle() => 
-        _enemyAnimator.StopAttackAnimation();
+    private void OnGiveDamage() => 
+        EnemyGiveDame?.Invoke(_currentTarget);
 
-    private void OnTargetClear()
+    private void OnIdle() => 
+        _enemyAnimator.StopAttack();
+
+    private void OnClearTarget()
     {
-        _currentTarget.PlayerDestroy -= OnTargetClear;
-        _currentTarget = null;
+        if (_playerHealth is not null)
+        {
+            _playerHealth.PlayerDestroy -= OnClearTarget;
+            _playerHealth = null;
+            _currentTarget = null;
+        }
     }
 
     private void OnMoveTarget(Player player)

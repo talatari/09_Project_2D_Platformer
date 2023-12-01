@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
     private PlayerDetector _playerDetector;
     private PlayerHealth _playerHealth;
     private Enemy _currentTarget;
+    private EnemyHealth _enemyHealth;
 
     public event Action<int> PlayerHealthed;
     public event Action<Enemy> PlayerGiveDamage;
     public event Action<int> PlayerTakeDamage;
+    public event Action PlayerDestroy;
 
     private void Awake()
     {
@@ -57,7 +59,12 @@ public class Player : MonoBehaviour
         if (_currentTarget is null)
         {
             _currentTarget = enemy;
-            _currentTarget.EnemyDestroy += OnClearTarget;
+
+            if (_currentTarget.TryGetComponent(out EnemyHealth enemyHealth))
+            {
+                _enemyHealth = enemyHealth;
+                _enemyHealth.EnemyDestroy += OnClearTarget;
+            }
         }
 
         if (_currentTarget.Equals(enemy))
@@ -66,7 +73,11 @@ public class Player : MonoBehaviour
 
     private void OnClearTarget()
     {
-        _currentTarget.EnemyDestroy -= OnClearTarget;
-        _currentTarget = null;
+        if (_enemyHealth is not null)
+        {
+            _enemyHealth.EnemyDestroy -= OnClearTarget;
+            _enemyHealth = null;
+            _currentTarget = null;
+        }
     }
 }
