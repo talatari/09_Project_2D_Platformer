@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3473500655155609701}
   - component: {fileID: 848888367815942441}
   m_Layer: 0
-  m_Name: AidKit+
+  m_Name: AidKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

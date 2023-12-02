@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1756483792476059548}
   - component: {fileID: 3065926047181059528}
   m_Layer: 0
-  m_Name: EnemyAnimator+
+  m_Name: EnemyAnimator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 4978770085926146571}
   - component: {fileID: 1767103302646676540}
   m_Layer: 0
-  m_Name: 57_Enemy+
+  m_Name: 57_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 1595756335900934092}
   - component: {fileID: 6682983835377404377}
   m_Layer: 0
-  m_Name: EnemyDetector+
+  m_Name: EnemyDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
