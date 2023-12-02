@@ -9,7 +9,6 @@ public class Bootstrapper : MonoBehaviour
     private void Awake()
     {
         InitializeSingleton();
-
         CreateLevel();
     }
 
@@ -29,15 +28,10 @@ public class Bootstrapper : MonoBehaviour
 
     private void CreateLevel()
     {
-        // MonoBehaviour' instances must be instantiated with 'GameObject.AddComponent<T>()' instead of 'new'
-        // PlayerFactory playerFactory = new PlayerFactory();
-        // TODO: так создавать правильней, чем на строчку выше?
-        PlayerFactory playerFactory = gameObject.AddComponent<PlayerFactory>();
-        // TODO: зачем мы тут создаем модель, если у нас фабрика умеет создавать модель игрока?
-        // PlayerModel playerModel = new PlayerModel();
-
-        // _level = new Level(playerFactory, playerModel);
-        _level = new Level(playerFactory);
+        PlayerFactory playerFactory = new PlayerFactory();
+        PlayerModel playerModel = new PlayerModel();
+        
+        _level = new Level(playerFactory, playerModel);
         _level.Start();
     }
 }

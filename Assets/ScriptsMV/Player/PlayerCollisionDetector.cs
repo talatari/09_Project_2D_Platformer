@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerCollicionDetector : MonoBehaviour
+public class PlayerCollisionDetector : MonoBehaviour
 {
     public PlayerModel PlayerModel { get; private set; }
 
@@ -11,6 +11,6 @@ public class PlayerCollicionDetector : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
             if (TryGetComponent(out Collision collision))
-                PlayerModel.Collision(collision); // TODO: почему тут подсвечивает как дорогостоящий вызов?
+                PlayerModel.Collision(collision);
     }
 }

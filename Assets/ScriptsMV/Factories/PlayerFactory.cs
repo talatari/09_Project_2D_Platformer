@@ -1,15 +1,13 @@
 using UnityEngine;
 
-public class PlayerFactory : MonoBehaviour
+public class PlayerFactory
 {
     public PlayerModel CreatePlayerModel() =>
         new ();
+    
+    public PlayerView CreatePlayerView() => 
+        Object.Instantiate(Resources.Load<PlayerView>("Player/Player"));
 
-    public PlayerView CreatePlayerView() =>
-        Instantiate(Resources.Load<PlayerView>(
-            "Player/Player"));
-
-    public PlayerCollicionDetector CreateCollisionDetector() =>
-        Instantiate(Resources.Load<PlayerCollicionDetector>(
-            "Player/PlayerCollicionDetector"));
+    public PlayerCollisionDetector CreateCollisionDetector() =>
+        Object.Instantiate(Resources.Load<PlayerCollisionDetector>("Player/PlayerCollisionDetector"));
 }
