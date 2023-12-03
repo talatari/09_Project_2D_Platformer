@@ -14,31 +14,32 @@ public class Player : MonoBehaviour
     public event Action<int> PlayerTakeDamage;
     public event Action<int> PlayerHealthed;
 
-    private void Awake()
-    {
-        _playerAnimator = GetComponentInChildren<PlayerAnimator>();
-        _playerDetector = GetComponentInChildren<PlayerDetector>();
+    private void Awake() => 
         _playerHealth = GetComponent<PlayerHealth>();
-    }
 
-    private void OnEnable()
-    {
-        _playerAnimator.AttackAnimationEnd += OnGiveDamage;
-        _playerDetector.EnemyClose += OnSelectTarget;
-        _playerDetector.EnemyFar += OnIdle;
+    private void OnEnable() => 
         _playerHealth.PlayerDestroy += OnDestroy;
-    }
 
-    private void OnDisable()
+    private void OnDisable() => 
+        _playerHealth.PlayerDestroy -= OnDestroy;
+
+    private void OnDestroy()
     {
         _playerAnimator.AttackAnimationEnd -= OnGiveDamage;
         _playerDetector.EnemyClose -= OnSelectTarget;
         _playerDetector.EnemyFar -= OnIdle;
-        _playerHealth.PlayerDestroy -= OnDestroy;
+        Destroy(gameObject);
     }
 
-    private void OnDestroy() => 
-        Destroy(gameObject);
+    public void Init(PlayerDetector playerDetector, PlayerAnimator playerAnimator)
+    {
+        _playerDetector = playerDetector;
+        _playerAnimator = playerAnimator;
+        
+        _playerAnimator.AttackAnimationEnd += OnGiveDamage;
+        _playerDetector.EnemyClose += OnSelectTarget;
+        _playerDetector.EnemyFar += OnIdle;
+    }
 
     public void CollectedAidKit(int health) => 
         PlayerHealthed?.Invoke(health);

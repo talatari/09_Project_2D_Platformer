@@ -31,7 +31,9 @@ public class Bootstrapper : MonoBehaviour
         PlayerFactory playerFactory = new PlayerFactory();
         PlayerModel playerModel = new PlayerModel();
         
-        _level = new Level(playerFactory, playerModel);
+        PlayerView playerView = playerFactory.CreatePlayerView(playerModel);
+
+        _level = new Level(playerView);
         _level.Start();
     }
 }
