@@ -4,16 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int _currentHealth = 200;
+    [SerializeField] private int _maxHealth = 200;
     
     private Player _player;
-    private int _maxHealth;
+    private int _currentHealth;
+    private int _minHealth = 0;
 
     public event Action PlayerDestroy = delegate { };
-    public event Action<int> HealthChanged = delegate { };
+    public event Action<int, int> HealthChanged = delegate { };
 
-    public int CurrentHealth => _currentHealth;
     public int MaxHealth => _maxHealth;
+    public int CurrentHealth => _currentHealth;
     
     private void Awake()
     {
@@ -21,9 +22,11 @@ public class PlayerHealth : MonoBehaviour
         _player.PlayerHealthed += OnCollectedAidKit;
         _player.PlayerTakeDamage += OnTakeDamage;
         
-        _maxHealth = _currentHealth;
-        HealthChanged(_currentHealth);
+        _currentHealth = _maxHealth;
     }
+
+    private void Start() => 
+        HealthChanged(_currentHealth, _maxHealth);
 
     private void OnDestroy()
     {
@@ -31,34 +34,20 @@ public class PlayerHealth : MonoBehaviour
         _player.PlayerTakeDamage -= OnTakeDamage;
     }
 
-    public void AddHealth(int health) => 
-        OnCollectedAidKit(health);
-
-    public void RemoveHealth(int damage) =>
-        OnTakeDamage(damage);
-
     private void OnCollectedAidKit(int health)
     {
-        if (_currentHealth + health >= _maxHealth)
-            _currentHealth = _maxHealth;
-        else
-            _currentHealth += health;
+        Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
         
-        HealthChanged(_currentHealth);
+        HealthChanged(_currentHealth, _maxHealth);
     }
     
     private void OnTakeDamage(int damage)
     {
-        if (_currentHealth - damage <= 0)
-        {
-            _currentHealth = 0;
+        Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
+        
+        if (_currentHealth <= _minHealth)
             PlayerDestroy();
-        }
-        else
-        {
-            _currentHealth -= damage;
-        }
-            
-        HealthChanged(_currentHealth);
+        
+        HealthChanged(_currentHealth, _maxHealth);
     }
 }
