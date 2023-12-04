@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnDestroy()
     {
-        _player.PlayerHealthed += OnCollectedAidKit;
+        _player.PlayerHealthed -= OnCollectedAidKit;
         _player.PlayerTakeDamage -= OnTakeDamage;
     }
 
