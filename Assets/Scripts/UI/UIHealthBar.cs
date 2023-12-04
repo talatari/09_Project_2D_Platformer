@@ -15,7 +15,7 @@ public class UIHealthBar : MonoBehaviour
     private Coroutine _coroutineSlowRefreshHealthText;
     private string _separator = " / ";
 
-    private void OnEnable()
+    private void Start()
     {
         _playerHealth = FindObjectOfType<PlayerHealth>();
         _playerHealth.HealthChanged += OnRefreshHealthBar;
@@ -49,7 +49,6 @@ public class UIHealthBar : MonoBehaviour
 
     private IEnumerator SlowRefreshHealthText(int targetHealth, int maxHealth)
     {
-        int normalize = 100;
         float slowSpeed = 0.1f;
         float target = (float) targetHealth / maxHealth;
         
@@ -57,7 +56,7 @@ public class UIHealthBar : MonoBehaviour
         {
             float currentHealth = Mathf.MoveTowards(_slowFillBar.fillAmount, target, slowSpeed * Time.deltaTime);
             
-            _tmpSlowText.text = Math.Floor(currentHealth * normalize) + _separator + maxHealth;
+            _tmpSlowText.text = Math.Floor(currentHealth * maxHealth) + _separator + maxHealth;
             _slowFillBar.fillAmount = currentHealth;
             
             yield return null;

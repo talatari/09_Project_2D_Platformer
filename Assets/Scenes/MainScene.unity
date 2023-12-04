@@ -1041,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3269759238730233392, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4279175606358902017, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
       propertyPath: m_fontSize
@@ -1063,6 +1063,14 @@ PrefabInstance:
       propertyPath: _removeHealthButtonText
       value: 
       objectReference: {fileID: 1138827858}
+    - target: {fileID: 5188945326773539798, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258249026437113029, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5658182268285138078, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
       propertyPath: m_Pivot.x
       value: 0
