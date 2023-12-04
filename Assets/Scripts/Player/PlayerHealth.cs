@@ -35,8 +35,8 @@ public class PlayerHealth : MonoBehaviour
     {
         print($"Current Player health: {_health}, damage by: -{damage}");
         _health -= damage;
-        
-        if (_health <= 0)
+
+        if (_health <= 0) 
             PlayerDestroy?.Invoke();
     }
 }

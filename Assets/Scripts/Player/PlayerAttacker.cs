@@ -19,6 +19,6 @@ public class PlayerAttacker : MonoBehaviour
     private void OnPlayerGiveDamage(Enemy enemy)
     {
         if (enemy is not null)
-            enemy.Take(_damage);
+            enemy.TakeDamage(_damage);
     }
 }

@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemyMover.PlayerClose += OnSelectTarget;
+        _enemyMover.PlayerClose += OnAttackAnimation;
         _enemyHealth.EnemyDestroy += OnDestroy;
         _enemyDetector.PlayerDetected += OnMoveTarget;
         _enemyDetector.PlayerFar += OnIdle;
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        _enemyMover.PlayerClose -= OnSelectTarget;
+        _enemyMover.PlayerClose -= OnAttackAnimation;
         _enemyHealth.EnemyDestroy -= OnDestroy;
         _enemyDetector.PlayerDetected -= OnMoveTarget;
         _enemyDetector.PlayerFar -= OnIdle;
@@ -45,28 +45,13 @@ public class Enemy : MonoBehaviour
     private void OnDestroy() => 
         Destroy(gameObject);
 
-    public void Take(int damage) => 
+    public void TakeDamage(int damage) => 
         EnemyTakeDamage?.Invoke(damage);
 
-    public void OnSelectTarget(Player player)
+    public void OnAttackAnimation()
     {
         _enemyAnimator.StopMove();
-        
         _enemyAnimator.PlayAttack();
-
-        if (_currentTarget is null)
-        {
-            _currentTarget = player;
-
-            if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
-            {
-                _playerHealth = playerHealth;
-                _playerHealth.PlayerDestroy += OnClearTarget;
-            }
-        }
-
-        if (_currentTarget.Equals(player))
-            _currentTarget = player;
     }
 
     private void OnGiveDamage() => 
@@ -83,16 +68,24 @@ public class Enemy : MonoBehaviour
             _playerHealth = null;
             _currentTarget = null;
         }
+        
+        _enemyMover.ClearTarger();
     }
 
     private void OnMoveTarget(Player player)
     {
+        _enemyPatrol.StopPatrol();
+        
         if (_currentTarget is null)
         {
             _currentTarget = player;
-            _enemyPatrol.StopPatrol();
+            _enemyMover.SetTarget(_currentTarget);
+            
+            if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
+            {
+                _playerHealth = playerHealth;
+                _playerHealth.PlayerDestroy += OnClearTarget;
+            }
         }
-
-        _enemyMover.SetTarget(player);
     }
 }

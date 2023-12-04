@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     public void CollectedAidKit(int health) => 
         PlayerHealthed?.Invoke(health);
 
-    public void Take(int damage) => 
+    public void TakeDamage(int damage) => 
         PlayerTakeDamage?.Invoke(damage);
 
     private void OnGiveDamage() => 
@@ -66,9 +66,6 @@ public class Player : MonoBehaviour
                 _enemyHealth.EnemyDestroy += OnClearTarget;
             }
         }
-
-        if (_currentTarget.Equals(enemy))
-            _currentTarget = enemy;
     }
 
     private void OnClearTarget()
