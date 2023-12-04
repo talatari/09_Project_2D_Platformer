@@ -10,7 +10,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private Animator _animator;
     
-    public event Action AttackAnimationEnd;
+    public event Action AttackAnimationEnd = delegate { };
 
     private void Awake() => 
         _animator = GetComponent<Animator>();
@@ -28,5 +28,5 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetBool(_attackNameParameter, false);
     
     public void AttackAnimationEnded() => 
-        AttackAnimationEnd?.Invoke();
+        AttackAnimationEnd();
 }

@@ -10,7 +10,7 @@ public class EnemyAnimator : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer[] _spriteRenderers;
     
-    public event Action AttackAnimationEnd;
+    public event Action AttackAnimationEnd = delegate { };
 
     private void Awake()
     {
@@ -40,5 +40,5 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetBool(_attackNameParameter, false);
     
     public void AttackAnimationEnded() => 
-        AttackAnimationEnd?.Invoke();
+        AttackAnimationEnd();
 }

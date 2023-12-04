@@ -4,39 +4,61 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int _health = 200;
-
-    private Player _player;
-
-    public event Action PlayerDestroy;
+    [SerializeField] private int _currentHealth = 200;
     
-    private void Awake() => 
+    private Player _player;
+    private int _maxHealth;
+
+    public event Action PlayerDestroy = delegate { };
+    public event Action<int> HealthChanged = delegate { };
+
+    public int CurrentHealth => _currentHealth;
+    public int MaxHealth => _maxHealth;
+    
+    private void Awake()
+    {
         _player = GetComponent<Player>();
-
-    private void OnEnable()
-    {
         _player.PlayerHealthed += OnCollectedAidKit;
-        _player.PlayerTakeDamage += OnTake;
+        _player.PlayerTakeDamage += OnTakeDamage;
+        
+        _maxHealth = _currentHealth;
+        HealthChanged(_currentHealth);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         _player.PlayerHealthed += OnCollectedAidKit;
-        _player.PlayerTakeDamage -= OnTake;
+        _player.PlayerTakeDamage -= OnTakeDamage;
     }
+
+    public void AddHealth(int health) => 
+        OnCollectedAidKit(health);
+
+    public void RemoveHealth(int damage) =>
+        OnTakeDamage(damage);
 
     private void OnCollectedAidKit(int health)
     {
-        print($"Current health: {_health}, AidKit bust health on {health}");
-        _health += health;
+        if (_currentHealth + health >= _maxHealth)
+            _currentHealth = _maxHealth;
+        else
+            _currentHealth += health;
+        
+        HealthChanged(_currentHealth);
     }
     
-    private void OnTake(int damage)
+    private void OnTakeDamage(int damage)
     {
-        print($"Current Player health: {_health}, damage by: -{damage}");
-        _health -= damage;
-
-        if (_health <= 0) 
-            PlayerDestroy?.Invoke();
+        if (_currentHealth - damage <= 0)
+        {
+            _currentHealth = 0;
+            PlayerDestroy();
+        }
+        else
+        {
+            _currentHealth -= damage;
+        }
+            
+        HealthChanged(_currentHealth);
     }
 }
