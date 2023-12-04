@@ -1,3 +1,4 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class PlayerFactory
@@ -24,6 +25,7 @@ public class PlayerFactory
     
     private PlayerAnimator CreatePlayerAnimator()
     {
+        Debug.Log("CreatePlayerAnimator");
         PlayerAnimator playerAnimator = _gameObjectCreator.Create<PlayerAnimator>();
         playerAnimator.name = "PlayerAnimator";
         return playerAnimator;
