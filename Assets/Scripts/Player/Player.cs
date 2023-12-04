@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private PlayerAnimator _playerAnimator;
-    private PlayerDetector _playerDetector;
+    private PlayerCollisionDetector _playerDetector;
     private PlayerHealth _playerHealth;
     private Enemy _currentTarget;
     private EnemyHealth _enemyHealth;
@@ -14,8 +14,16 @@ public class Player : MonoBehaviour
     public event Action<int> PlayerTakeDamage;
     public event Action<int> PlayerHealthed;
 
-    private void Awake() => 
+    private void Awake()
+    {
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerAnimator = GetComponentInChildren<PlayerAnimator>();
+        _playerDetector = GetComponentInChildren<PlayerCollisionDetector>();
+        
+        _playerAnimator.AttackAnimationEnd += OnGiveDamage;
+        _playerDetector.EnemyClose += OnSelectTarget;
+        _playerDetector.EnemyFar += OnIdle;
+    }
 
     private void OnEnable() => 
         _playerHealth.PlayerDestroy += OnDestroy;
