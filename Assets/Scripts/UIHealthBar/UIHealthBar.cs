@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro _tmpText;
-    [SerializeField] private TextMeshPro _tmpSlowText;
+    [SerializeField] private TMP_Text _tmpText;
+    [SerializeField] private TMP_Text _tmpSlowText;
     [SerializeField] private Image _fillBar;
     [SerializeField] private Image _slowFillBar;
     

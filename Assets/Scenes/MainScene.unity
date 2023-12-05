@@ -543,6 +543,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7593141306827406859, guid: 15af2c3cb5aaf4b78a395d6a8e122c11, type: 3}
   m_PrefabInstance: {fileID: 1375332042}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1478214194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1478214196}
+  - component: {fileID: 1478214195}
+  m_Layer: 0
+  m_Name: TypedProcessor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1478214195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478214194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75bc3aeafff29d4294a27937966d3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1478214196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478214194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1617292610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4390584714749173423, guid: 6d1928b9284fd45a5ab5da6dc675464c, type: 3}
@@ -937,6 +981,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 857048597885683946, guid: c54905b7b376a4419906cdf45296ef17, type: 3}
+      propertyPath: m_isRightToLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3846359616829514480, guid: c54905b7b376a4419906cdf45296ef17, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1020,6 +1068,10 @@ PrefabInstance:
     - target: {fileID: 4845085179036535188, guid: c54905b7b376a4419906cdf45296ef17, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5720090927703342289, guid: c54905b7b376a4419906cdf45296ef17, type: 3}
+      propertyPath: m_Name
+      value: HealthSlowText
       objectReference: {fileID: 0}
     - target: {fileID: 6234215321672769630, guid: c54905b7b376a4419906cdf45296ef17, type: 3}
       propertyPath: m_Name
@@ -1155,3 +1207,4 @@ SceneRoots:
   - {fileID: 595535183}
   - {fileID: 498382649}
   - {fileID: 821322938}
+  - {fileID: 1478214196}
