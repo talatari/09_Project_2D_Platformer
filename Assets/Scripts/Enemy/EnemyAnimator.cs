@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class PlayerAnimatorData
+public static class EnemyAnimatorData
 {
     public static class Params
     {
@@ -25,10 +25,10 @@ public class EnemyAnimator : MonoBehaviour
     }
 
     public void Move() => 
-        _animator.SetBool(PlayerAnimatorData.Params.Move, true);
+        _animator.SetBool(EnemyAnimatorData.Params.Move, true);
 
     public void StopMove() => 
-        _animator.SetBool(PlayerAnimatorData.Params.Move, false);
+        _animator.SetBool(EnemyAnimatorData.Params.Move, false);
 
     public void Flip()
     {
@@ -40,10 +40,10 @@ public class EnemyAnimator : MonoBehaviour
     }
 
     public void PlayAttack() => 
-        _animator.SetBool(PlayerAnimatorData.Params.Attack, true);
+        _animator.SetBool(EnemyAnimatorData.Params.Attack, true);
 
     public void StopAttack() => 
-        _animator.SetBool(PlayerAnimatorData.Params.Attack, false);
+        _animator.SetBool(EnemyAnimatorData.Params.Attack, false);
     
     public void AttackAnimationEnded() => 
         AttackAnimationEnd();
