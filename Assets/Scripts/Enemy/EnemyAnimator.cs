@@ -1,15 +1,21 @@
 using System;
 using UnityEngine;
 
+public static class PlayerAnimatorData
+{
+    public static class Params
+    {
+        public static readonly int Move = Animator.StringToHash(nameof(Move));
+        public static readonly int Attack = Animator.StringToHash(nameof(Attack));
+    }
+}
+
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimator : MonoBehaviour
 {
-    private static readonly int _moveNameParameter = Animator.StringToHash("Move");
-    private static readonly int _attackNameParameter = Animator.StringToHash("Attack");
-
     private Animator _animator;
     private SpriteRenderer[] _spriteRenderers;
-    
+
     public event Action AttackAnimationEnd = delegate { };
 
     private void Awake()
@@ -19,10 +25,10 @@ public class EnemyAnimator : MonoBehaviour
     }
 
     public void Move() => 
-        _animator.SetBool(_moveNameParameter, true);
+        _animator.SetBool(PlayerAnimatorData.Params.Move, true);
 
     public void StopMove() => 
-        _animator.SetBool(_moveNameParameter, false);
+        _animator.SetBool(PlayerAnimatorData.Params.Move, false);
 
     public void Flip()
     {
@@ -34,10 +40,10 @@ public class EnemyAnimator : MonoBehaviour
     }
 
     public void PlayAttack() => 
-        _animator.SetBool(_attackNameParameter, true);
+        _animator.SetBool(PlayerAnimatorData.Params.Attack, true);
 
     public void StopAttack() => 
-        _animator.SetBool(_attackNameParameter, false);
+        _animator.SetBool(PlayerAnimatorData.Params.Attack, false);
     
     public void AttackAnimationEnded() => 
         AttackAnimationEnd();
