@@ -1,23 +1,12 @@
 using System;
 using UnityEngine;
 
-public static class PlayerAnimatorData
-{
-    public static class Params
-    {
-        public static readonly int Run = Animator.StringToHash(nameof(Run));
-        public static readonly int Jump = Animator.StringToHash(nameof(Jump));        
-        public static readonly int Attack = Animator.StringToHash(nameof(Attack));
-
-    }
-}
-
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator _animator;
     
-    public event Action AttackAnimationEnd = delegate { };
+    public event Action AttackAnimationEnd;
 
     private void Awake() => 
         _animator = GetComponent<Animator>();
@@ -35,5 +24,5 @@ public class PlayerAnimator : MonoBehaviour
         _animator.SetBool(PlayerAnimatorData.Params.Attack, false);
     
     public void AttackAnimationEnded() => 
-        AttackAnimationEnd();
+        AttackAnimationEnd?.Invoke();
 }

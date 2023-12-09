@@ -1,22 +1,13 @@
 using System;
 using UnityEngine;
 
-public static class EnemyAnimatorData
-{
-    public static class Params
-    {
-        public static readonly int Move = Animator.StringToHash(nameof(Move));
-        public static readonly int Attack = Animator.StringToHash(nameof(Attack));
-    }
-}
-
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimator : MonoBehaviour
 {
     private Animator _animator;
     private SpriteRenderer[] _spriteRenderers;
 
-    public event Action AttackAnimationEnd = delegate { };
+    public event Action AttackAnimationEnd;
 
     private void Awake()
     {
@@ -46,5 +37,5 @@ public class EnemyAnimator : MonoBehaviour
         _animator.SetBool(EnemyAnimatorData.Params.Attack, false);
     
     public void AttackAnimationEnded() => 
-        AttackAnimationEnd();
+        AttackAnimationEnd?.Invoke();
 }
