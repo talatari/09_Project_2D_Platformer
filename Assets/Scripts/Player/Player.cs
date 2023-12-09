@@ -10,9 +10,9 @@ public class Player : MonoBehaviour
     private Enemy _currentTarget;
     private EnemyHealth _enemyHealth;
 
-    public event Action<Enemy> PlayerGiveDamage = delegate { };
-    public event Action<int> PlayerTakeDamage = delegate { };
-    public event Action<int> PlayerHealthed = delegate { };
+    public event Action<Enemy> PlayerGiveDamage;
+    public event Action<int> PlayerTakeDamage;
+    public event Action<int> PlayerHealthed;
 
     private void Awake()
     {
@@ -41,13 +41,13 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
 
     public void CollectedAidKit(int health) => 
-        PlayerHealthed(health);
+        PlayerHealthed?.Invoke(health);
 
     public void TakeDamage(int damage) => 
-        PlayerTakeDamage(damage);
+        PlayerTakeDamage?.Invoke(damage);
 
     private void OnGiveDamage() => 
-        PlayerGiveDamage(_currentTarget);
+        PlayerGiveDamage?.Invoke(_currentTarget);
     
     private void OnIdle() => 
         _playerAnimator.StopAttack();

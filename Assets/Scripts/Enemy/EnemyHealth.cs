@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     private Enemy _enemy;
 
-    public event Action EnemyDestroy = delegate { };
+    public event Action EnemyDestroy;
 
     private void Awake() => 
         _enemy = GetComponent<Enemy>();
@@ -25,6 +25,6 @@ public class EnemyHealth : MonoBehaviour
         _health -= damage;
 
         if (_health <= 0)
-            EnemyDestroy();
+            EnemyDestroy?.Invoke();
     }
 }

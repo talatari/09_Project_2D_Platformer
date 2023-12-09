@@ -10,8 +10,8 @@ public class PlayerHealth : MonoBehaviour
     private int _currentHealth;
     private int _minHealth = 0;
 
-    public event Action PlayerDestroy = delegate { };
-    public event Action<int, int> HealthChanged = delegate { };
+    public event Action PlayerDestroy;
+    public event Action<int, int> HealthChanged;
 
     public int MaxHealth => _maxHealth;
     public int CurrentHealth => _currentHealth;
@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     private void Start() => 
-        HealthChanged(_currentHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
 
     private void OnDestroy()
     {
@@ -36,18 +36,18 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollectedAidKit(int health)
     {
-        Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
         
-        HealthChanged(_currentHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
     
     private void OnTakeDamage(int damage)
     {
-        Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
+        _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
         
         if (_currentHealth <= _minHealth)
-            PlayerDestroy();
+            PlayerDestroy?.Invoke();
         
-        HealthChanged(_currentHealth, _maxHealth);
+        HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 }

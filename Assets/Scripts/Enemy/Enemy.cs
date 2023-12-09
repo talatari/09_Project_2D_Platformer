@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     private EnemyAnimator _enemyAnimator;
     private EnemyHealth _enemyHealth;
 
-    public event Action<Player> EnemyGiveDame = delegate { };
-    public event Action<int> EnemyTakeDamage = delegate { };
+    public event Action<Player> EnemyGiveDame;
+    public event Action<int> EnemyTakeDamage;
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
 
     public void TakeDamage(int damage) => 
-        EnemyTakeDamage(damage);
+        EnemyTakeDamage?.Invoke(damage);
 
     public void OnAttackAnimation()
     {
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     }
 
     private void OnGiveDamage() => 
-        EnemyGiveDame(_currentTarget);
+        EnemyGiveDame?.Invoke(_currentTarget);
 
     private void OnIdle() => 
         _enemyAnimator.StopAttack();

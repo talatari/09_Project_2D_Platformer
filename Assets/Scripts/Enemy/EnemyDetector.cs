@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
-    public event Action<Player> PlayerDetected = delegate { };
-    public event Action PlayerFar = delegate { };
+    public event Action<Player> PlayerDetected;
+    public event Action PlayerFar;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Player player))
-            PlayerDetected(player);
+            PlayerDetected?.Invoke(player);
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.TryGetComponent(out Player player))
-            PlayerFar();
+            PlayerFar?.Invoke();
     }
 }
