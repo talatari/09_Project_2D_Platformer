@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
     private EnemyHealth _enemyHealth;
 
     public event Action<Enemy> PlayerGiveDamage;
-    public event Action<int> PlayerTakeDamage;
-    public event Action<int> PlayerHealthed;
 
     private void Awake()
     {
@@ -40,11 +38,11 @@ public class Player : MonoBehaviour
     private void OnDestroy() => 
         Destroy(gameObject);
 
-    public void CollectedAidKit(int health) => 
-        PlayerHealthed?.Invoke(health);
+    public void CollectedAidKit(int health) =>
+        _playerHealth.CollectedAidKit(health);
 
-    public void TakeDamage(int damage) => 
-        PlayerTakeDamage?.Invoke(damage);
+    public void TakeDamage(int damage) =>
+        _playerHealth.TakeDamage(damage);
 
     private void OnGiveDamage() => 
         PlayerGiveDamage?.Invoke(_currentTarget);

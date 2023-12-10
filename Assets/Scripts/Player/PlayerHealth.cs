@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 200;
     
-    private Player _player;
     private int _currentHealth;
     private int _minHealth = 0;
 
@@ -16,32 +14,20 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth => _maxHealth;
     public int CurrentHealth => _currentHealth;
     
-    private void Awake()
-    {
-        _player = GetComponent<Player>();
-        _player.PlayerHealthed += OnCollectedAidKit;
-        _player.PlayerTakeDamage += OnTakeDamage;
-        
+    private void Awake() => 
         _currentHealth = _maxHealth;
-    }
 
     private void Start() => 
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
-
-    private void OnDestroy()
-    {
-        _player.PlayerHealthed -= OnCollectedAidKit;
-        _player.PlayerTakeDamage -= OnTakeDamage;
-    }
-
-    private void OnCollectedAidKit(int health)
+    
+    public void CollectedAidKit(int health)
     {
         _currentHealth = Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
         
         HealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
     
-    private void OnTakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
         
