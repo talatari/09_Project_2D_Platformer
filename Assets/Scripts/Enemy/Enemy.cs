@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     private EnemyHealth _enemyHealth;
 
     public event Action<Player> EnemyGiveDame;
-    public event Action<int> EnemyTakeDamage;
 
     private void Awake()
     {
@@ -46,7 +45,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
 
     public void TakeDamage(int damage) => 
-        EnemyTakeDamage?.Invoke(damage);
+        _enemyHealth.TakeDamage(damage);
 
     public void OnAttackAnimation()
     {
