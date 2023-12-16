@@ -47,7 +47,7 @@ namespace UI
             while (Math.Abs(fillBar.x + offset - target) > almostZero)
             {
                 float currentHealth = Mathf.MoveTowards(target, fillBar.x + offset, slowSpeed * Time.deltaTime);
-                _fillBar.transform.localScale = new Vector3(currentHealth, fillBar.y, fillBar.z);
+                _fillBar.transform.localScale = new Vector3(currentHealth - offset, fillBar.y, fillBar.z);
                 _fillBar.color = _gradient.Evaluate(_fillBar.transform.localScale.x);
                 
                 yield return null;
