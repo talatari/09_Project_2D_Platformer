@@ -9,7 +9,7 @@ namespace UI
     public class PlayerHealthBar : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _fillBar;
-
+        
         private PlayerHealth _playerHealth;
         private Coroutine _refreshHealthText;
 
