@@ -9,6 +9,7 @@ namespace UI
     public class EnemyHealthBar : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _fillBar;
+        [SerializeField] private Gradient _gradient;
         
         private EnemyHealth _enemyHealth;
         private Coroutine _refreshHealthText;
@@ -47,6 +48,7 @@ namespace UI
             {
                 float currentHealth = Mathf.MoveTowards(target, fillBar.x + offset, slowSpeed * Time.deltaTime);
                 _fillBar.transform.localScale = new Vector3(currentHealth, fillBar.y, fillBar.z);
+                _fillBar.color = _gradient.Evaluate(_fillBar.transform.localScale.x);
                 
                 yield return null;
             }
