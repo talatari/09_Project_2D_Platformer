@@ -33,10 +33,10 @@ namespace Players
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
         
+            HealthChanged?.Invoke(_currentHealth, _maxHealth);
+            
             if (_currentHealth <= _minHealth)
                 PlayerDestroy?.Invoke();
-        
-            HealthChanged?.Invoke(_currentHealth, _maxHealth);
         }
     }
 }
