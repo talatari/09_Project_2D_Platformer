@@ -50,7 +50,7 @@ namespace Players
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
             {
                 _playerAnimator.PlayJumpAnimation();
-                _rigidbody2D.AddForce((Vector2)transform.up * _jumpForce, ForceMode2D.Impulse);
+                _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             }
         }
     }
