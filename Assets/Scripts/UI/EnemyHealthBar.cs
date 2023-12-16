@@ -2,19 +2,22 @@ using System;
 using System.Collections;
 using Enemies;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(EnemyHealth))]
     public class EnemyHealthBar : MonoBehaviour
     {
-        [SerializeField] private Image _fillBar;
-        [SerializeField] private EnemyHealth _enemyHealth;
-    
+        [SerializeField] private SpriteRenderer _fillBar;
+        
+        private EnemyHealth _enemyHealth;
         private Coroutine _refreshHealthText;
 
-        private void Start() => 
+        private void Start()
+        {
+            _enemyHealth = GetComponent<EnemyHealth>();
             _enemyHealth.HealthChanged += OnRefreshEnemyHealth;
+        }
 
         private void OnDestroy()
         {
@@ -34,14 +37,17 @@ namespace UI
 
         private IEnumerator RefreshHealthText(int targetHealth, int maxHealth)
         {
+            float offset = 0.05f;
             float slowSpeed = 0.1f;
+            float almostZero = 0.01f;
             float target = (float) targetHealth / maxHealth;
+            Vector3 fillBar = _fillBar.transform.localScale;
         
-            while (Math.Abs(_fillBar.fillAmount - target) > 0.01f)
+            while (Math.Abs(fillBar.x + offset - target) > almostZero)
             {
-                float currentHealth = Mathf.MoveTowards(_fillBar.fillAmount, target, slowSpeed * Time.deltaTime);
-                _fillBar.fillAmount = currentHealth;
-            
+                float currentHealth = Mathf.MoveTowards(target, fillBar.x + offset, slowSpeed * Time.deltaTime);
+                _fillBar.transform.localScale = new Vector3(currentHealth, fillBar.y, fillBar.z);
+                
                 yield return null;
             }
         }
