@@ -8,41 +8,39 @@ namespace UI
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Image _slowFillBar;
+        [SerializeField] private Image _fillBar;
         [SerializeField] private Health _health;
     
-        private Coroutine _coroutineSlowRefreshHealthText;
+        private Coroutine _refreshHealthText;
 
-        private void Start()
-        {
-            _health.HealthChanged += OnSlowRefreshHealthBar;
-        }
+        private void Start() => 
+            _health.HealthChanged += OnRefreshHealthBar;
 
         private void OnDestroy()
         {
-            _health.HealthChanged -= OnSlowRefreshHealthBar;
+            _health.HealthChanged -= OnRefreshHealthBar;
         
-            if (_coroutineSlowRefreshHealthText != null)
-                StopCoroutine(_coroutineSlowRefreshHealthText);
+            if (_refreshHealthText != null)
+                StopCoroutine(_refreshHealthText);
         }
 
-        private void OnSlowRefreshHealthBar(int currentHealth, int maxHealth)
+        private void OnRefreshHealthBar(int currentHealth, int maxHealth)
         {
-            if (_coroutineSlowRefreshHealthText != null)
-                StopCoroutine(_coroutineSlowRefreshHealthText);
+            if (_refreshHealthText != null)
+                StopCoroutine(_refreshHealthText);
 
-            _coroutineSlowRefreshHealthText = StartCoroutine(SlowRefreshHealthText(currentHealth, maxHealth));
+            _refreshHealthText = StartCoroutine(RefreshHealthText(currentHealth, maxHealth));
         }
 
-        private IEnumerator SlowRefreshHealthText(int targetHealth, int maxHealth)
+        private IEnumerator RefreshHealthText(int targetHealth, int maxHealth)
         {
             float slowSpeed = 0.1f;
             float target = (float) targetHealth / maxHealth;
         
-            while (Math.Abs(_slowFillBar.fillAmount - target) > 0.01f)
+            while (Math.Abs(_fillBar.fillAmount - target) > 0.01f)
             {
-                float currentHealth = Mathf.MoveTowards(_slowFillBar.fillAmount, target, slowSpeed * Time.deltaTime);
-                _slowFillBar.fillAmount = currentHealth;
+                float currentHealth = Mathf.MoveTowards(_fillBar.fillAmount, target, slowSpeed * Time.deltaTime);
+                _fillBar.fillAmount = currentHealth;
             
                 yield return null;
             }
