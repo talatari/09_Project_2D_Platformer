@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class AidKit : MonoBehaviour
+namespace Others
 {
-    private int _health;
-
-    public int Health => _health;
-
-    private void Start()
+    public class AidKit : MonoBehaviour
     {
-        int minHealth = 5;
-        int maxHealth = 25;
-        float selfDestroyDelay = 10f;
-        
-        _health = Random.Range(minHealth, maxHealth);
-        Destroy(gameObject, selfDestroyDelay);
-    }
+        private int _health;
 
-    public void Destoy() => 
-        Destroy(gameObject);
+        public int Health => _health;
+
+        private void Start()
+        {
+            int minHealth = 5;
+            int maxHealth = 25;
+            float selfDestroyDelay = 10f;
+        
+            _health = Random.Range(minHealth, maxHealth);
+            Destroy(gameObject, selfDestroyDelay);
+        }
+
+        public void Destoy() => 
+            Destroy(gameObject);
+    }
 }
