@@ -3,21 +3,21 @@ using UnityEngine;
 namespace Players
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Mover : MonoBehaviour
+    public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private float _speed = 10f;
         [SerializeField] private float _jumpForce = 12f;
     
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
-        private Animator _animator;
+        private PlayerAnimator _playerAnimator;
         private float _horizontalMove;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            _animator = GetComponentInChildren<Animator>();
+            _playerAnimator = GetComponentInChildren<PlayerAnimator>();
         }
 
         private void Update()
@@ -34,7 +34,7 @@ namespace Players
             _horizontalMove = Input.GetAxis("Horizontal") * _speed;
             _rigidbody2D.velocity = new Vector2(_horizontalMove, _rigidbody2D.velocity.y);
 
-            _animator.PlayRunAnimation(_horizontalMove);
+            _playerAnimator.PlayRunAnimation(_horizontalMove);
         }
 
         private void Fliping()
@@ -49,7 +49,7 @@ namespace Players
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _animator.PlayJumpAnimation();
+                _playerAnimator.PlayJumpAnimation();
                 _rigidbody2D.AddForce((Vector2)transform.up * _jumpForce, ForceMode2D.Impulse);
             }
         }

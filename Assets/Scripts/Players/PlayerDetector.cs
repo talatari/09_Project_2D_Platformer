@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Players
 {
-    public class Detector : MonoBehaviour
+    public class PlayerDetector : MonoBehaviour
     {
         public event Action<Enemy> EnemyClose;
         public event Action EnemyFar;

@@ -4,77 +4,77 @@ using UnityEngine;
 
 namespace Players
 {
-    [RequireComponent(typeof(Health))]
+    [RequireComponent(typeof(PlayerHealth))]
     public class Player : MonoBehaviour
     {
-        private Animator _animator;
-        private Detector _detector;
-        private Health _health;
+        private PlayerAnimator _playerAnimator;
+        private PlayerDetector _playerDetector;
+        private PlayerHealth _playerHealth;
         private Enemy _currentTarget;
-        private Enemies.Health _enemyHealth;
+        private Enemies.EnemyHealth _enemyEnemyHealth;
 
         public event Action<Enemy> PlayerGiveDamage;
 
         private void Awake()
         {
-            _animator = GetComponentInChildren<Animator>();
-            _detector = GetComponentInChildren<Detector>();
-            _health = GetComponent<Health>();
+            _playerAnimator = GetComponentInChildren<PlayerAnimator>();
+            _playerDetector = GetComponentInChildren<PlayerDetector>();
+            _playerHealth = GetComponent<PlayerHealth>();
         }
 
         private void OnEnable()
         {
-            _animator.AttackAnimationEnd += OnGiveDamage;
-            _detector.EnemyClose += OnSelectTarget;
-            _detector.EnemyFar += OnIdle;
-            _health.PlayerDestroy += OnDestroy;
+            _playerAnimator.AttackAnimationEnd += OnGiveDamage;
+            _playerDetector.EnemyClose += OnSelectTarget;
+            _playerDetector.EnemyFar += OnIdle;
+            _playerHealth.PlayerDestroy += OnDestroy;
         }
 
         private void OnDisable()
         {
-            _animator.AttackAnimationEnd -= OnGiveDamage;
-            _detector.EnemyClose -= OnSelectTarget;
-            _detector.EnemyFar -= OnIdle;
-            _health.PlayerDestroy -= OnDestroy;
+            _playerAnimator.AttackAnimationEnd -= OnGiveDamage;
+            _playerDetector.EnemyClose -= OnSelectTarget;
+            _playerDetector.EnemyFar -= OnIdle;
+            _playerHealth.PlayerDestroy -= OnDestroy;
         }
 
         private void OnDestroy() => 
             Destroy(gameObject);
 
         public void CollectedAidKit(int health) =>
-            _health.CollectedAidKit(health);
+            _playerHealth.CollectedAidKit(health);
 
         public void TakeDamage(int damage) =>
-            _health.TakeDamage(damage);
+            _playerHealth.TakeDamage(damage);
 
         private void OnGiveDamage() => 
             PlayerGiveDamage?.Invoke(_currentTarget);
     
         private void OnIdle() => 
-            _animator.StopAttack();
+            _playerAnimator.StopAttack();
     
         private void OnSelectTarget(Enemy enemy)
         {
-            _animator.StartAttack();
+            _playerAnimator.StartAttack();
 
             if (_currentTarget is null)
             {
                 _currentTarget = enemy;
 
-                if (_currentTarget.TryGetComponent(out Enemies.Health enemyHealth))
+                if (_currentTarget.TryGetComponent(out Enemies.EnemyHealth enemyHealth))
                 {
-                    _enemyHealth = enemyHealth;
-                    _enemyHealth.EnemyDestroy += OnClearTarget;
+                    _enemyEnemyHealth = enemyHealth;
+                    _enemyEnemyHealth.EnemyDestroy += OnClearTarget;
                 }
             }
         }
 
         private void OnClearTarget()
         {
-            if (_enemyHealth is not null)
+            if (_enemyEnemyHealth is not null)
             {
-                _enemyHealth.EnemyDestroy -= OnClearTarget;
-                _enemyHealth = null;
+                _enemyEnemyHealth.EnemyDestroy -= OnClearTarget;
+                _enemyEnemyHealth = null;
                 _currentTarget = null;
             }
         }

@@ -7,14 +7,14 @@ namespace Enemies
     {
         [SerializeField] private float _speedMove = 2f;
 
-        private Animator _animator;
+        private EnemyAnimator _enemyAnimator;
         private float _timeMove;
         private float _timeIdle;
         private float _directionMove = 1f;
         private Coroutine _coroutinePatrol;
     
         private void Awake() => 
-            _animator = GetComponentInChildren<Animator>();
+            _enemyAnimator = GetComponentInChildren<EnemyAnimator>();
 
         private void Start() => 
             _coroutinePatrol = StartCoroutine(Patrol());
@@ -35,7 +35,7 @@ namespace Enemies
                 _timeMove = 5f;
                 _timeIdle = 2f;
                 _directionMove *= -1;
-                _animator.Move();
+                _enemyAnimator.Move();
             
                 while (_timeMove > 0)
                 {
@@ -49,9 +49,9 @@ namespace Enemies
                     yield return null;
                 }
             
-                _animator.StopMove();
+                _enemyAnimator.StopMove();
             
-                _animator.Flip();
+                _enemyAnimator.Flip();
 
                 while (_timeIdle > 0)
                 {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Players
 {
-    public class Health : MonoBehaviour
+    public class PlayerHealth : MonoBehaviour
     {
         [SerializeField] private int _maxHealth = 200;
     
