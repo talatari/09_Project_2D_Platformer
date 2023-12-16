@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Enemies
 {
     [RequireComponent(typeof(UnityEngine.Animator))]
-    public class Animator : MonoBehaviour
+    public class EnemyAnimator : MonoBehaviour
     {
         private UnityEngine.Animator _animator;
         private SpriteRenderer[] _spriteRenderers;
@@ -18,10 +18,10 @@ namespace Enemies
         }
 
         public void Move() => 
-            _animator.SetBool(AnimatorData.Params.Move, true);
+            _animator.SetBool(EnemyAnimatorData.Params.Move, true);
 
         public void StopMove() => 
-            _animator.SetBool(AnimatorData.Params.Move, false);
+            _animator.SetBool(EnemyAnimatorData.Params.Move, false);
 
         public void Flip()
         {
@@ -33,10 +33,10 @@ namespace Enemies
         }
 
         public void PlayAttack() => 
-            _animator.SetBool(AnimatorData.Params.Attack, true);
+            _animator.SetBool(EnemyAnimatorData.Params.Attack, true);
 
         public void StopAttack() => 
-            _animator.SetBool(AnimatorData.Params.Attack, false);
+            _animator.SetBool(EnemyAnimatorData.Params.Attack, false);
     
         public void AttackAnimationEnded() => 
             AttackAnimationEnd?.Invoke();

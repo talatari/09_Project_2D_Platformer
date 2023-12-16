@@ -3,21 +3,21 @@ using UnityEngine;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(Health))]
-    public class CoinSpawner : MonoBehaviour
+    [RequireComponent(typeof(EnemyHealth))]
+    public class EnemyCoinSpawner : MonoBehaviour
     {
         [SerializeField] private Coin _coinPrefab;
 
-        private Health _enemyHealth;
+        private EnemyHealth _enemyEnemyHealth;
 
         private void Awake() => 
-            _enemyHealth = GetComponent<Health>();
+            _enemyEnemyHealth = GetComponent<EnemyHealth>();
 
         private void OnEnable() => 
-            _enemyHealth.EnemyDestroy += OnSpawnCoin;
+            _enemyEnemyHealth.EnemyDestroy += OnSpawnCoin;
 
         private void OnDisable() => 
-            _enemyHealth.EnemyDestroy -= OnSpawnCoin;
+            _enemyEnemyHealth.EnemyDestroy -= OnSpawnCoin;
 
         private void OnSpawnCoin() => 
             Instantiate(_coinPrefab, transform.position, Quaternion.identity);

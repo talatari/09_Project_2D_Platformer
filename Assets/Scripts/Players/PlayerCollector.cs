@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Players
 {
     [RequireComponent(typeof(Player))]
-    public class Collector : MonoBehaviour
+    public class PlayerCollector : MonoBehaviour
     {
         private Player _player;
         private int _coinsCollected;

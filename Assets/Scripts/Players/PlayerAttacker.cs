@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Players
 {
     [RequireComponent(typeof(Player))]
-    public class Attacker : MonoBehaviour
+    public class PlayerAttacker : MonoBehaviour
     {
         [SerializeField] private int _damage = 14;
 

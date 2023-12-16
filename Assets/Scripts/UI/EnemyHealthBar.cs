@@ -1,30 +1,30 @@
 using System;
 using System.Collections;
-using Players;
+using Enemies;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class HealthBar : MonoBehaviour
+    public class EnemyHealthBar : MonoBehaviour
     {
         [SerializeField] private Image _fillBar;
-        [SerializeField] private Health _health;
+        [SerializeField] private EnemyHealth _enemyHealth;
     
         private Coroutine _refreshHealthText;
 
         private void Start() => 
-            _health.HealthChanged += OnRefreshHealthBar;
+            _enemyHealth.HealthChanged += OnRefreshEnemyHealth;
 
         private void OnDestroy()
         {
-            _health.HealthChanged -= OnRefreshHealthBar;
+            _enemyHealth.HealthChanged -= OnRefreshEnemyHealth;
         
             if (_refreshHealthText != null)
                 StopCoroutine(_refreshHealthText);
         }
 
-        private void OnRefreshHealthBar(int currentHealth, int maxHealth)
+        private void OnRefreshEnemyHealth(int currentHealth, int maxHealth)
         {
             if (_refreshHealthText != null)
                 StopCoroutine(_refreshHealthText);
