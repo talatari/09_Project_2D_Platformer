@@ -47,7 +47,7 @@ namespace Players
 
         private void TryJump()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
             {
                 _playerAnimator.PlayJumpAnimation();
                 _rigidbody2D.AddForce((Vector2)transform.up * _jumpForce, ForceMode2D.Impulse);
