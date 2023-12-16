@@ -22,17 +22,15 @@ namespace Players
         private void Start() => 
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
     
-        public void CollectedAidKit(int health)
+        public void Heal(int health)
         {
             _currentHealth = Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
-        
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
         }
     
         public void TakeDamage(int damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
-        
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             
             if (_currentHealth <= _minHealth)

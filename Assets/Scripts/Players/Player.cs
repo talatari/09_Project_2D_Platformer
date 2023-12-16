@@ -42,7 +42,7 @@ namespace Players
             Destroy(gameObject);
 
         public void CollectedAidKit(int health) =>
-            _playerHealth.CollectedAidKit(health);
+            _playerHealth.Heal(health);
 
         public void TakeDamage(int damage) =>
             _playerHealth.TakeDamage(damage);
