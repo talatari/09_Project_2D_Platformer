@@ -4,9 +4,9 @@ using Players;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIHealthBar
+namespace UI
 {
-    public class UIHealthBar : MonoBehaviour
+    public class HealthBar : MonoBehaviour
     {
         [SerializeField] private Image _slowFillBar;
         [SerializeField] private Health _health;
