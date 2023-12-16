@@ -37,15 +37,17 @@ namespace UI
 
         private IEnumerator RefreshHealthText(int targetHealth, int maxHealth)
         {
+            float offset = 0.05f;
             float slowSpeed = 0.1f;
+            float almostZero = 0.01f;
             float target = (float) targetHealth / maxHealth;
-            float fillBar = _fillBar.transform.localScale.x - target;
-            
-            while (Math.Abs(fillBar - target) > 0.01f)
+            Vector3 fillBar = _fillBar.transform.localScale;
+
+            while (Math.Abs(fillBar.x + offset - target) > almostZero)
             {
-                float currentHealth = Mathf.MoveTowards(fillBar, target, slowSpeed * Time.deltaTime);
-                fillBar = currentHealth;
-            
+                float currentHealth = Mathf.MoveTowards(target, fillBar.x + offset, slowSpeed * Time.deltaTime);
+                _fillBar.transform.localScale = new Vector3(currentHealth, fillBar.y, fillBar.z);
+                
                 yield return null;
             }
         }
