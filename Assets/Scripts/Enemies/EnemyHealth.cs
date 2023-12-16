@@ -22,7 +22,6 @@ namespace Enemies
         public void TakeDamage(int damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
-            
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             
             if (_currentHealth <= 0)
