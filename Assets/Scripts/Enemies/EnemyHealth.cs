@@ -5,13 +5,13 @@ namespace Enemies
 {
     public class EnemyHealth : MonoBehaviour
     {
-        [SerializeField] private int _maxHealth = 100;
+        [SerializeField] private float _maxHealth = 100;
 
-        private int _currentHealth;
-        private int _minHealth = 0;
+        private float _currentHealth;
+        private float _minHealth = 0;
         
         public event Action EnemyDestroy;
-        public event Action<int, int> HealthChanged;
+        public event Action<float, float> HealthChanged;
 
         private void Awake() => 
             _currentHealth = _maxHealth;
@@ -19,9 +19,10 @@ namespace Enemies
         private void Start() => 
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
         
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
+            
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             
             if (_currentHealth <= 0)

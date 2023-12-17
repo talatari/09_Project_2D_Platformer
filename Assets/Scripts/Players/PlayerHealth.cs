@@ -5,13 +5,13 @@ namespace Players
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField] private int _maxHealth = 200;
+        [SerializeField] private float _maxHealth = 200;
     
-        private int _currentHealth;
-        private int _minHealth = 0;
+        private float _currentHealth;
+        private float _minHealth = 0;
 
         public event Action PlayerDestroy;
-        public event Action<int, int> HealthChanged;
+        public event Action<float, float> HealthChanged;
 
         private void Awake() => 
             _currentHealth = _maxHealth;
@@ -19,13 +19,13 @@ namespace Players
         private void Start() => 
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
     
-        public void Heal(int health)
+        public void Heal(float health)
         {
             _currentHealth = Mathf.Clamp(_currentHealth += health, _minHealth, _maxHealth);
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
         }
     
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
             HealthChanged?.Invoke(_currentHealth, _maxHealth);

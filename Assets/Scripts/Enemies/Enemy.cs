@@ -47,7 +47,7 @@ namespace Enemies
         private void OnDestroy() => 
             Destroy(gameObject);
 
-        public void TakeDamage(int damage) => 
+        public void TakeDamage(float damage) => 
             _enemyHealth.TakeDamage(damage);
 
         public void OnAttackAnimation()

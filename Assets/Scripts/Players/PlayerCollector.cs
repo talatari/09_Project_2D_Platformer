@@ -15,14 +15,14 @@ namespace Players
         private void OnCollectedCoin()
         {
             _coinsCollected++;
-            print($"Coin collected! Current score = {_coinsCollected}");
+            // print($"Coin collected! Current score = {_coinsCollected}");
         }
 
         private void OnCollisionEnter2D(Collision2D collision2D)
         {
             if (collision2D.transform.TryGetComponent(out AidKit aidKit))
             {
-                _player.CollectedAidKit(aidKit.Health);
+                _player.Heal(aidKit.Health);
                 aidKit.Destoy();
             }
         

@@ -12,7 +12,7 @@ namespace Others
         {
             int minHealth = 5;
             int maxHealth = 25;
-            float selfDestroyDelay = 100f;
+            float selfDestroyDelay = 10f;
         
             _health = Random.Range(minHealth, maxHealth);
             Destroy(gameObject, selfDestroyDelay);
