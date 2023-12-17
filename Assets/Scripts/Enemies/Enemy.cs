@@ -15,7 +15,7 @@ namespace Enemies
         private EnemyAnimator _enemyAnimator;
         private EnemyHealth _enemyHealth;
 
-        public event Action<Player> EnemyGivenDamage;
+        public event Action<Player> GivenDamage;
 
         private void Awake()
         {
@@ -31,7 +31,7 @@ namespace Enemies
             _enemyMover.PlayerReached += OnAttackAnimation;
             _enemyHealth.Destroyed += OnDestroy;
             _enemyDetector.PlayerDetected += OnMoveTarget;
-            _enemyDetector.PlayerHided += OnIdle;
+            _enemyDetector.PlayerGone += OnIdle;
             _enemyAnimator.AttackAnimationEnded += OnGiveDamage;
         }
 
@@ -40,7 +40,7 @@ namespace Enemies
             _enemyMover.PlayerReached -= OnAttackAnimation;
             _enemyHealth.Destroyed -= OnDestroy;
             _enemyDetector.PlayerDetected -= OnMoveTarget;
-            _enemyDetector.PlayerHided -= OnIdle;
+            _enemyDetector.PlayerGone -= OnIdle;
             _enemyAnimator.AttackAnimationEnded -= OnGiveDamage;
         }
 
@@ -57,7 +57,7 @@ namespace Enemies
         }
 
         private void OnGiveDamage() => 
-            EnemyGivenDamage?.Invoke(_currentTarget);
+            GivenDamage?.Invoke(_currentTarget);
 
         private void OnIdle() => 
             _enemyAnimator.StopAttack();

@@ -7,7 +7,7 @@ namespace Players
     public class PlayerDetector : MonoBehaviour
     {
         public event Action<Enemy> EnemyDetected;
-        public event Action EnemyHided;
+        public event Action EnemyGone;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -18,7 +18,7 @@ namespace Players
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))
-                EnemyHided?.Invoke();
+                EnemyGone?.Invoke();
         }
     }
 }
