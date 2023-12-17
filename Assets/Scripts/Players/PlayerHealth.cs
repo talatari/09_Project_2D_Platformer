@@ -13,9 +13,6 @@ namespace Players
         public event Action PlayerDestroy;
         public event Action<int, int> HealthChanged;
 
-        public int MaxHealth => _maxHealth;
-        public int CurrentHealth => _currentHealth;
-    
         private void Awake() => 
             _currentHealth = _maxHealth;
 

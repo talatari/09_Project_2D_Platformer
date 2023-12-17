@@ -8,7 +8,7 @@ namespace Enemies
     public class Enemy : MonoBehaviour
     {
         private Player _currentTarget;
-        private Players.PlayerHealth _playerPlayerHealth;
+        private PlayerHealth _playerPlayerHealth;
         private EnemyMover _enemyMover;
         private EnemyPatrol _enemyPatrol;
         private EnemyDetector _enemyDetector;
@@ -83,7 +83,7 @@ namespace Enemies
                 _currentTarget = player;
                 _enemyMover.SetTarget(_currentTarget);
             
-                if (_currentTarget.TryGetComponent(out Players.PlayerHealth playerHealth))
+                if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
                 {
                     _playerPlayerHealth = playerHealth;
                     _playerPlayerHealth.PlayerDestroy += OnClearTarget;

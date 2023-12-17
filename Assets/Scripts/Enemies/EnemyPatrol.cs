@@ -50,13 +50,11 @@ namespace Enemies
                 }
             
                 _enemyAnimator.StopMove();
-            
                 _enemyAnimator.Flip();
 
                 while (_timeIdle > 0)
                 {
                     _timeIdle -= Time.deltaTime;
-
                     yield return null;
                 }
             }

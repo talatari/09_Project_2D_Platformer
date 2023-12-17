@@ -15,7 +15,7 @@ namespace Others
 
         private void OnDisable()
         {
-            if (_coroutineSpawn is not null) 
+            if (_coroutineSpawn != null) 
                 StopCoroutine(_coroutineSpawn);
         }
 

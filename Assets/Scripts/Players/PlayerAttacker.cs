@@ -21,7 +21,7 @@ namespace Players
 
         private void OnPlayerGiveDamage(Enemy enemy)
         {
-            if (enemy is not null)
+            if (enemy != null)
                 enemy.TakeDamage(_damage);
         }
     }

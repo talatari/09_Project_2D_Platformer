@@ -11,7 +11,7 @@ namespace Players
         private PlayerDetector _playerDetector;
         private PlayerHealth _playerHealth;
         private Enemy _currentTarget;
-        private Enemies.EnemyHealth _enemyEnemyHealth;
+        private EnemyHealth _enemyEnemyHealth;
 
         public event Action<Enemy> PlayerGiveDamage;
 
@@ -61,7 +61,7 @@ namespace Players
             {
                 _currentTarget = enemy;
 
-                if (_currentTarget.TryGetComponent(out Enemies.EnemyHealth enemyHealth))
+                if (_currentTarget.TryGetComponent(out EnemyHealth enemyHealth))
                 {
                     _enemyEnemyHealth = enemyHealth;
                     _enemyEnemyHealth.EnemyDestroy += OnClearTarget;
