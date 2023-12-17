@@ -16,7 +16,7 @@ namespace Enemies
 
         private void Update()
         {
-            if (_player is not null)
+            if (_player != null)
             {
                 _target = _player.transform.position;
                 transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);

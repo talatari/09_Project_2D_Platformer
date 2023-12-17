@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aidKitPrefab: {fileID: 5947332797461300981, guid: afde5beecd81e4476b9c925ec7a6a41d, type: 3}
-  _waitTime: 5
+  _waitTime: 10

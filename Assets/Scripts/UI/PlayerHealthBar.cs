@@ -28,7 +28,7 @@ namespace UI
                 StopCoroutine(_refreshHealthText);
         }
 
-        private void OnRefreshPlayerHealthBar(int currentHealth, int maxHealth)
+        private void OnRefreshPlayerHealthBar(float currentHealth, float maxHealth)
         {
             if (_refreshHealthText != null)
                 StopCoroutine(_refreshHealthText);
@@ -36,12 +36,12 @@ namespace UI
             _refreshHealthText = StartCoroutine(RefreshHealthText(currentHealth, maxHealth));
         }
 
-        private IEnumerator RefreshHealthText(int targetHealth, int maxHealth)
+        private IEnumerator RefreshHealthText(float targetHealth, float maxHealth)
         {
             float offset = 0.05f;
             float slowSpeed = 0.1f;
             float almostZero = 0.01f;
-            float target = (float) targetHealth / maxHealth;
+            float target = targetHealth / maxHealth;
             Vector3 fillBar = _fillBar.transform.localScale;
 
             while (Math.Abs(fillBar.x + offset - target) > almostZero)
