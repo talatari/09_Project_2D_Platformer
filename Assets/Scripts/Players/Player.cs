@@ -37,7 +37,7 @@ namespace Players
         {
             _playerAnimator.AttackAnimationEnded += OnGiveDamage;
             _playerDetector.EnemyDetected += OnSelectTarget;
-            _playerDetector.EnemyHided += OnIdle;
+            _playerDetector.EnemyGone += OnIdle;
             _playerHealth.Destroyed += OnDestroyed;
         }
 
@@ -45,7 +45,7 @@ namespace Players
         {
             _playerAnimator.AttackAnimationEnded -= OnGiveDamage;
             _playerDetector.EnemyDetected -= OnSelectTarget;
-            _playerDetector.EnemyHided -= OnIdle;
+            _playerDetector.EnemyGone -= OnIdle;
             _playerHealth.Destroyed -= OnDestroyed;
         }
 
