@@ -14,14 +14,14 @@ namespace Enemies
             _enemy = GetComponent<Enemy>();
 
         private void OnEnable() => 
-            _enemy.EnemyGiveDame += OnEnemyGiveDamage;
+            _enemy.EnemyGivenDamage += OnEnemyGiveDamage;
 
         private void OnDisable() => 
-            _enemy.EnemyGiveDame -= OnEnemyGiveDamage;
+            _enemy.EnemyGivenDamage -= OnEnemyGiveDamage;
 
         private void OnEnemyGiveDamage(Player player)
         {
-            if (player is not null)
+            if (player != null)
                 player.TakeDamage(_damage);
         }
     }

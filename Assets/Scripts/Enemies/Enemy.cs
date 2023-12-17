@@ -15,7 +15,7 @@ namespace Enemies
         private EnemyAnimator _enemyAnimator;
         private EnemyHealth _enemyHealth;
 
-        public event Action<Player> EnemyGiveDame;
+        public event Action<Player> EnemyGivenDamage;
 
         private void Awake()
         {
@@ -28,20 +28,20 @@ namespace Enemies
 
         private void OnEnable()
         {
-            _enemyMover.PlayerClose += OnAttackAnimation;
-            _enemyHealth.EnemyDestroy += OnDestroy;
+            _enemyMover.PlayerReached += OnAttackAnimation;
+            _enemyHealth.Destroyed += OnDestroy;
             _enemyDetector.PlayerDetected += OnMoveTarget;
-            _enemyDetector.PlayerFar += OnIdle;
-            _enemyAnimator.AttackAnimationEnd += OnGiveDamage;
+            _enemyDetector.PlayerHided += OnIdle;
+            _enemyAnimator.AttackAnimationEnded += OnGiveDamage;
         }
 
         private void OnDisable()
         {
-            _enemyMover.PlayerClose -= OnAttackAnimation;
-            _enemyHealth.EnemyDestroy -= OnDestroy;
+            _enemyMover.PlayerReached -= OnAttackAnimation;
+            _enemyHealth.Destroyed -= OnDestroy;
             _enemyDetector.PlayerDetected -= OnMoveTarget;
-            _enemyDetector.PlayerFar -= OnIdle;
-            _enemyAnimator.AttackAnimationEnd -= OnGiveDamage;
+            _enemyDetector.PlayerHided -= OnIdle;
+            _enemyAnimator.AttackAnimationEnded -= OnGiveDamage;
         }
 
         private void OnDestroy() => 
@@ -57,16 +57,16 @@ namespace Enemies
         }
 
         private void OnGiveDamage() => 
-            EnemyGiveDame?.Invoke(_currentTarget);
+            EnemyGivenDamage?.Invoke(_currentTarget);
 
         private void OnIdle() => 
             _enemyAnimator.StopAttack();
 
         private void OnClearTarget()
         {
-            if (_playerPlayerHealth is not null)
+            if (_playerPlayerHealth != null)
             {
-                _playerPlayerHealth.PlayerDestroy -= OnClearTarget;
+                _playerPlayerHealth.Destroyed -= OnClearTarget;
                 _playerPlayerHealth = null;
                 _currentTarget = null;
             }
@@ -78,7 +78,7 @@ namespace Enemies
         {
             _enemyPatrol.StopPatrol();
         
-            if (_currentTarget is null)
+            if (_currentTarget == null)
             {
                 _currentTarget = player;
                 _enemyMover.SetTarget(_currentTarget);
@@ -86,7 +86,7 @@ namespace Enemies
                 if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
                 {
                     _playerPlayerHealth = playerHealth;
-                    _playerPlayerHealth.PlayerDestroy += OnClearTarget;
+                    _playerPlayerHealth.Destroyed += OnClearTarget;
                 }
             }
         }

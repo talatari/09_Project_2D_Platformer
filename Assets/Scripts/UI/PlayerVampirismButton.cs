@@ -30,6 +30,7 @@ namespace UI
         private void OnVampirismButtonClick()
         {
             _playerVampirism.StartVampirism();
+            SetInactive();
         }
     }
 }

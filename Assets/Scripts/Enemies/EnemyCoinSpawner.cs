@@ -14,10 +14,10 @@ namespace Enemies
             _enemyEnemyHealth = GetComponent<EnemyHealth>();
 
         private void OnEnable() => 
-            _enemyEnemyHealth.EnemyDestroy += OnSpawnCoin;
+            _enemyEnemyHealth.Destroyed += OnSpawnCoin;
 
         private void OnDisable() => 
-            _enemyEnemyHealth.EnemyDestroy -= OnSpawnCoin;
+            _enemyEnemyHealth.Destroyed -= OnSpawnCoin;
 
         private void OnSpawnCoin() => 
             Instantiate(_coinPrefab, transform.position, Quaternion.identity);

@@ -10,7 +10,7 @@ namespace Enemies
         private float _currentHealth;
         private float _minHealth = 0;
         
-        public event Action EnemyDestroy;
+        public event Action Destroyed;
         public event Action<float, float> HealthChanged;
 
         private void Awake() => 
@@ -22,11 +22,10 @@ namespace Enemies
         public void TakeDamage(float damage)
         {
             _currentHealth = Mathf.Clamp(_currentHealth -= damage, _minHealth, _maxHealth);
-            
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             
             if (_currentHealth <= 0)
-                EnemyDestroy?.Invoke();
+                Destroyed?.Invoke();
         }
     }
 }

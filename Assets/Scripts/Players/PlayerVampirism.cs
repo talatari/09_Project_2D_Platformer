@@ -76,16 +76,17 @@ namespace Players
                 
                 _currentFillVampirismBar = Mathf.MoveTowards(_currentFillVampirismBar, 0, speed * Time.deltaTime);
                 
-                Vampirism(_currentFillVampirismBar);
+                ApplyVampirism(_currentFillVampirismBar);
                 Vampired?.Invoke(_currentFillVampirismBar);
                 
                 yield return null;
             }
 
             StopVampirism();
+            _player.VampirismButtonSetActive();
         }
 
-        private void Vampirism(float impact)
+        private void ApplyVampirism(float impact)
         {
             if (_enemy != null)
             {

@@ -9,7 +9,7 @@ namespace Enemies
         private Animator _animator;
         private SpriteRenderer[] _spriteRenderers;
 
-        public event Action AttackAnimationEnd;
+        public event Action AttackAnimationEnded;
 
         private void Awake()
         {
@@ -38,7 +38,7 @@ namespace Enemies
         public void StopAttack() => 
             _animator.SetBool(EnemyAnimatorParameters.Attack, false);
     
-        public void AttackAnimationEnded() => 
-            AttackAnimationEnd?.Invoke();
+        public void AttackAnimationEnd() => 
+            AttackAnimationEnded?.Invoke();
     }
 }

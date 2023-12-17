@@ -15,7 +15,8 @@ namespace Players
         private void OnCollectedCoin()
         {
             _coinsCollected++;
-            // print($"Coin collected! Current score = {_coinsCollected}");
+            
+            print($"Coin collected! Current score = {_coinsCollected}");
         }
 
         private void OnCollisionEnter2D(Collision2D collision2D)

@@ -10,7 +10,7 @@ namespace Players
         private float _currentHealth;
         private float _minHealth = 0;
 
-        public event Action PlayerDestroy;
+        public event Action Destroyed;
         public event Action<float, float> HealthChanged;
 
         private void Awake() => 
@@ -31,7 +31,7 @@ namespace Players
             HealthChanged?.Invoke(_currentHealth, _maxHealth);
             
             if (_currentHealth <= _minHealth)
-                PlayerDestroy?.Invoke();
+                Destroyed?.Invoke();
         }
     }
 }
