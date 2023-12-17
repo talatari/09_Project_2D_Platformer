@@ -19,27 +19,21 @@ namespace UI
             _startFillVampirismBar = _fillBar.transform.localScale;
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() => 
             _playerVampirism.Vampired -= OnRefreshPlayerVampirismBar;
-        }
 
-        public void SetActive()
-        {
+        public void SetActive() => 
             _playerVampirismBar.SetActive(true);
-        }
-        
+
         public void SetInactive()
         {
             _fillBar.transform.localScale = _startFillVampirismBar;
             _playerVampirismBar.SetActive(false);
         }
 
-        public float GetCurrentFillVampirismBar()
-        {
-            return _startFillVampirismBar.x;
-        }
-        
+        public float GetCurrentFillVampirismBar() => 
+            _startFillVampirismBar.x;
+
         private void OnRefreshPlayerVampirismBar(float fill)
         {
             Vector3 fillBar = _fillBar.transform.localScale;

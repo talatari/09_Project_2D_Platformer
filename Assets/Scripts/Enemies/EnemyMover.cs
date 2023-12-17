@@ -12,7 +12,7 @@ namespace Enemies
         private Vector3 _target;
         private float _minDistance = 3f;
 
-        public event Action PlayerClose;
+        public event Action PlayerReached;
 
         private void Update()
         {
@@ -22,7 +22,7 @@ namespace Enemies
                 transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
             
                 if ((transform.position - _target).magnitude < _minDistance)
-                    PlayerClose?.Invoke();
+                    PlayerReached?.Invoke();
             }
         }
 

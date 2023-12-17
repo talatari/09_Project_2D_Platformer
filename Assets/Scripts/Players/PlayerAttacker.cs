@@ -14,10 +14,10 @@ namespace Players
             _player = GetComponent<Player>();
 
         private void OnEnable() => 
-            _player.PlayerGiveDamage += OnPlayerGiveDamage;
+            _player.PlayerGivenDamage += OnPlayerGiveDamage;
 
         private void OnDisable() => 
-            _player.PlayerGiveDamage -= OnPlayerGiveDamage;
+            _player.PlayerGivenDamage -= OnPlayerGiveDamage;
 
         private void OnPlayerGiveDamage(Enemy enemy)
         {

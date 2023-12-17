@@ -8,7 +8,7 @@ namespace Players
     {
         private Animator _animator;
     
-        public event Action AttackAnimationEnd;
+        public event Action AttackAnimationEnded;
 
         private void Awake() => 
             _animator = GetComponent<Animator>();
@@ -25,7 +25,7 @@ namespace Players
         public void StopAttack() => 
             _animator.SetBool(PlayerAnimatorParameters.Attack, false);
     
-        public void AttackAnimationEnded() => 
-            AttackAnimationEnd?.Invoke();
+        public void AttackAnimationEnd() => 
+            AttackAnimationEnded?.Invoke();
     }
 }

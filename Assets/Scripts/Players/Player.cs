@@ -17,7 +17,7 @@ namespace Players
         private EnemyHealth _enemyEnemyHealth;
         private PlayerVampirism _playerVampirism;
 
-        public event Action<Enemy> PlayerGiveDamage;
+        public event Action<Enemy> PlayerGivenDamage;
 
         private void OnValidate()
         {
@@ -35,21 +35,21 @@ namespace Players
 
         private void OnEnable()
         {
-            _playerAnimator.AttackAnimationEnd += OnGiveDamage;
-            _playerDetector.EnemyClose += OnSelectTarget;
-            _playerDetector.EnemyFar += OnIdle;
-            _playerHealth.PlayerDestroy += OnDestroy;
+            _playerAnimator.AttackAnimationEnded += OnGiveDamage;
+            _playerDetector.EnemyDetected += OnSelectTarget;
+            _playerDetector.EnemyHided += OnIdle;
+            _playerHealth.Destroyed += OnDestroyed;
         }
 
         private void OnDisable()
         {
-            _playerAnimator.AttackAnimationEnd -= OnGiveDamage;
-            _playerDetector.EnemyClose -= OnSelectTarget;
-            _playerDetector.EnemyFar -= OnIdle;
-            _playerHealth.PlayerDestroy -= OnDestroy;
+            _playerAnimator.AttackAnimationEnded -= OnGiveDamage;
+            _playerDetector.EnemyDetected -= OnSelectTarget;
+            _playerDetector.EnemyHided -= OnIdle;
+            _playerHealth.Destroyed -= OnDestroyed;
         }
 
-        private void OnDestroy() => 
+        private void OnDestroyed() => 
             Destroy(gameObject);
 
         public void Heal(float health) =>
@@ -57,9 +57,12 @@ namespace Players
 
         public void TakeDamage(float damage) =>
             _playerHealth.TakeDamage(damage);
-        
+
+        public void VampirismButtonSetActive() => 
+            _playerVampirismButton.SetActive();
+
         private void OnGiveDamage() => 
-            PlayerGiveDamage?.Invoke(_currentTarget);
+            PlayerGivenDamage?.Invoke(_currentTarget);
     
         private void OnIdle()
         {
@@ -85,7 +88,7 @@ namespace Players
                 if (_currentTarget.TryGetComponent(out EnemyHealth enemyHealth))
                 {
                     _enemyEnemyHealth = enemyHealth;
-                    _enemyEnemyHealth.EnemyDestroy += OnClearTarget;
+                    _enemyEnemyHealth.Destroyed += OnClearTarget;
                 }
             }
         }
@@ -94,7 +97,7 @@ namespace Players
         {
             if (_enemyEnemyHealth != null)
             {
-                _enemyEnemyHealth.EnemyDestroy -= OnClearTarget;
+                _enemyEnemyHealth.Destroyed -= OnClearTarget;
                 _enemyEnemyHealth = null;
                 _currentTarget = null;
             }
