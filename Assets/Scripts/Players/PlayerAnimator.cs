@@ -14,16 +14,16 @@ namespace Players
             _animator = GetComponent<Animator>();
 
         public void PlayRunAnimation(float speed) => 
-            _animator.SetBool(PlayerAnimatorData.Params.Run, Math.Abs(speed) > 0);
+            _animator.SetBool(PlayerAnimatorParameters.Run, Math.Abs(speed) > 0);
 
         public void PlayJumpAnimation() => 
-            _animator.SetTrigger(PlayerAnimatorData.Params.Jump);
+            _animator.SetTrigger(PlayerAnimatorParameters.Jump);
 
         public void StartAttack() => 
-            _animator.SetBool(PlayerAnimatorData.Params.Attack, true);
+            _animator.SetBool(PlayerAnimatorParameters.Attack, true);
 
         public void StopAttack() => 
-            _animator.SetBool(PlayerAnimatorData.Params.Attack, false);
+            _animator.SetBool(PlayerAnimatorParameters.Attack, false);
     
         public void AttackAnimationEnded() => 
             AttackAnimationEnd?.Invoke();
