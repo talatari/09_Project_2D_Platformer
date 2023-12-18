@@ -38,7 +38,8 @@ namespace Players
             _playerAnimator.AttackAnimationEnded += OnGiveDamage;
             _playerDetector.EnemyDetected += OnSelectTarget;
             _playerDetector.EnemyGone += OnIdle;
-            _playerHealth.Destroyed += OnDestroyed;
+            _playerDetector.Died += OnDestroy;
+            _playerHealth.Destroyed += OnDestroy;
         }
 
         private void OnDisable()
@@ -46,10 +47,11 @@ namespace Players
             _playerAnimator.AttackAnimationEnded -= OnGiveDamage;
             _playerDetector.EnemyDetected -= OnSelectTarget;
             _playerDetector.EnemyGone -= OnIdle;
-            _playerHealth.Destroyed -= OnDestroyed;
+            _playerDetector.Died -= OnDestroy;
+            _playerHealth.Destroyed -= OnDestroy;
         }
 
-        private void OnDestroyed() => 
+        private void OnDestroy() => 
             Destroy(gameObject);
 
         public void Heal(float health) =>
