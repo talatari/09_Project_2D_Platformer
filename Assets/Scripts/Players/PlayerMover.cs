@@ -68,8 +68,6 @@ namespace Players
                     _playerAnimator.PlayJumpAnimation();
                     _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
                 }
-            
-            print("test");
         }
     }
 }
