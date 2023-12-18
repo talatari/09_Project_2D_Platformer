@@ -8,28 +8,34 @@ namespace Enemies
     {
         [SerializeField] private float _speed = 6f;
     
-        private Player _player;
-        private Vector3 _target;
-        private float _minDistance = 3f;
+        private Enemy _enemy;
+        private Transform _target;
+        private float _minDistance = 4f;
 
         public event Action PlayerReached;
 
         private void Update()
         {
-            if (_player != null)
+            if (_target != null)
             {
-                _target = _player.transform.position;
-                transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
-            
-                if ((transform.position - _target).magnitude < _minDistance)
+                transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+
+                if ((transform.position - _target.position).magnitude < _minDistance)
+                {
                     PlayerReached?.Invoke();
+
+                    _enemy.OnClearTarget();
+                }
             }
         }
 
-        public void SetTarget(Player player) => 
-            _player = player;
+        public void SetTarget(Player player, Enemy enemy)
+        {
+            _target = player.transform;
+            _enemy = enemy;
+        }
 
-        public void ClearTarger() => 
-            _player = null;
+        public void ClearTarget() => 
+            _target = null;
     }
 }

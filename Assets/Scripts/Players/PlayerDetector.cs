@@ -1,5 +1,6 @@
 using System;
 using Enemies;
+using Others;
 using UnityEngine;
 
 namespace Players
@@ -8,11 +9,15 @@ namespace Players
     {
         public event Action<Enemy> EnemyDetected;
         public event Action EnemyGone;
+        public event Action Died;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerStay2D(Collider2D other)
         {
             if (other.TryGetComponent(out Enemy enemy))
                 EnemyDetected?.Invoke(enemy);
+            
+            if (other.TryGetComponent(out Ground ground))
+                Died?.Invoke();
         }
 
         private void OnTriggerExit2D(Collider2D other)

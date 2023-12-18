@@ -58,13 +58,7 @@ namespace Enemies
             _enemyAnimator.PlayAttack();
         }
 
-        private void OnGiveDamage() => 
-            GivenDamage?.Invoke(_currentTarget);
-
-        private void OnIdle() => 
-            _enemyAnimator.StopAttack();
-
-        private void OnClearTarget()
+        public void OnClearTarget()
         {
             if (_playerPlayerHealth != null)
             {
@@ -73,8 +67,14 @@ namespace Enemies
                 _currentTarget = null;
             }
         
-            _enemyMover.ClearTarger();
+            _enemyMover.ClearTarget();
         }
+
+        private void OnGiveDamage() => 
+            GivenDamage?.Invoke(_currentTarget);
+
+        private void OnIdle() => 
+            _enemyAnimator.StopAttack();
 
         private void OnMoveTarget(Player player)
         {
@@ -83,7 +83,7 @@ namespace Enemies
             if (_currentTarget == null)
             {
                 _currentTarget = player;
-                _enemyMover.SetTarget(_currentTarget);
+                _enemyMover.SetTarget(_currentTarget, this);
             
                 if (_currentTarget.TryGetComponent(out PlayerHealth playerHealth))
                 {
