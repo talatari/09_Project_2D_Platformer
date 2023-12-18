@@ -20,5 +20,7 @@ namespace Players
             if (other.TryGetComponent(out Enemy enemy))
                 EnemyGone?.Invoke();
         }
+        
+        
     }
 }

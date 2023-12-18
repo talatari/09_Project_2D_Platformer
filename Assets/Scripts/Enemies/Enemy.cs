@@ -32,6 +32,7 @@ namespace Enemies
             _enemyHealth.Destroyed += OnDestroy;
             _enemyDetector.PlayerDetected += OnMoveTarget;
             _enemyDetector.PlayerGone += OnIdle;
+            _enemyDetector.Died += OnDestroy;
             _enemyAnimator.AttackAnimationEnded += OnGiveDamage;
         }
 
@@ -41,6 +42,7 @@ namespace Enemies
             _enemyHealth.Destroyed -= OnDestroy;
             _enemyDetector.PlayerDetected -= OnMoveTarget;
             _enemyDetector.PlayerGone -= OnIdle;
+            _enemyDetector.Died -= OnDestroy;
             _enemyAnimator.AttackAnimationEnded -= OnGiveDamage;
         }
 
