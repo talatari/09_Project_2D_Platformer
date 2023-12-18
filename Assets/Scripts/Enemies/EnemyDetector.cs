@@ -16,7 +16,7 @@ namespace Enemies
             if (other.TryGetComponent(out Player player))
                 PlayerDetected?.Invoke(player);
             
-            if (other.TryGetComponent(out Ground ground))
+            if (other.TryGetComponent(out DeadGround deadGround))
                 Died?.Invoke();
         }
     
