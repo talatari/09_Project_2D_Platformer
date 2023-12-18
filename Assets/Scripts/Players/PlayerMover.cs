@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Players
@@ -6,7 +7,7 @@ namespace Players
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private float _speed = 10f;
-        [SerializeField] private float _jumpForce = 12f;
+        [SerializeField] private float _jumpForce = 1250f;
     
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
