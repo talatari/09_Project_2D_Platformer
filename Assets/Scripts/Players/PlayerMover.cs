@@ -1,4 +1,5 @@
 using System;
+using Others;
 using UnityEngine;
 
 namespace Players
@@ -13,6 +14,7 @@ namespace Players
         private SpriteRenderer _spriteRenderer;
         private PlayerAnimator _playerAnimator;
         private float _horizontalMove;
+        private bool _isGrounded;
 
         private void Awake()
         {
@@ -28,6 +30,18 @@ namespace Players
             Fliping();
 
             TryJump();
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Ground ground))
+                _isGrounded = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Ground ground))
+                _isGrounded = false;
         }
 
         private void Moving()
@@ -48,11 +62,12 @@ namespace Players
 
         private void TryJump()
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
-            {
-                _playerAnimator.PlayJumpAnimation();
-                _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            }
+            if (_isGrounded)
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
+                {
+                    _playerAnimator.PlayJumpAnimation();
+                    _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+                }
         }
     }
 }
