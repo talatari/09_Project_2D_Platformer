@@ -59,7 +59,7 @@ namespace Players
             else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
                 _spriteRenderer.flipX = false;
         }
-
+        
         private void TryJump()
         {
             if (_isGrounded)
@@ -68,6 +68,8 @@ namespace Players
                     _playerAnimator.PlayJumpAnimation();
                     _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
                 }
+            
+            print("test");
         }
     }
 }
