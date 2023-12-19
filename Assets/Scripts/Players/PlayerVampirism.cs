@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Enemies;
-using UI;
 using UnityEngine;
 
 namespace Players
