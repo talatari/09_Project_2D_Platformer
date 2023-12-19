@@ -19,36 +19,36 @@ namespace UI
         
         private void Start()
         {
-            _playerVampirism.FillChanged += OnRefreshPlayerVampirismBar;
-            _playerVampirism.VampireActivated += OnSetActive;
-            _playerVampirism.VampireDeactivated += OnSetInactive;
+            _playerVampirism.FillChanged += OnRefreshBar;
+            _playerVampirism.VampireActivated += OnActive;
+            _playerVampirism.VampireDeactivated += OnInactive;
             
             _startFillBar = _fillBar.transform.localScale;
         }
 
         private void OnDestroy()
         {
-            _playerVampirism.FillChanged -= OnRefreshPlayerVampirismBar;
-            _playerVampirism.VampireActivated -= OnSetActive;
-            _playerVampirism.VampireDeactivated -= OnSetInactive;
+            _playerVampirism.FillChanged -= OnRefreshBar;
+            _playerVampirism.VampireActivated -= OnActive;
+            _playerVampirism.VampireDeactivated -= OnInactive;
         }
 
-        private void OnSetActive()
+        private void OnActive()
         {
             _backgroundBar.enabled = true;
             _fillBar.enabled = true;
             
-            _playerVampirism.SetCurrentFill(_startFillBar.x);
+            _playerVampirism.SetStartFill(_startFillBar.x);
         }
 
-        private void OnSetInactive()
+        private void OnInactive()
         {
             _fillBar.transform.localScale = _startFillBar;
             _backgroundBar.enabled = false;
             _fillBar.enabled = false;
         }
 
-        private void OnRefreshPlayerVampirismBar(float fill)
+        private void OnRefreshBar(float fill)
         {
             Vector3 fillBar = _fillBar.transform.localScale;
             _fillBar.transform.localScale = new Vector3(fill, fillBar.y, fillBar.z);

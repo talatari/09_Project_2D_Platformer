@@ -9,11 +9,12 @@ namespace Players
     {
         [SerializeField] private float _duration = 6.0f;
 
-        private Player _player;
-        private Enemy _enemy;
+        private float _ratio = 0.25f;
         private float _currentFill;
+        private Enemy _enemy;
+        private Player _player;
         private Coroutine _coroutineVampirism;
-        
+
         public event Action<float> FillChanged;
         public event Action VampireActivated;
         public event Action VampireDeactivated;
@@ -24,8 +25,8 @@ namespace Players
                 StopCoroutine(_coroutineVampirism);
         }
 
-        public void SetCurrentFill(float currentFill) => 
-            _currentFill = currentFill;
+        public void SetStartFill(float startFill) => 
+            _currentFill = startFill;
 
         public void SetTarget(Enemy enemy, Player player)
         {
@@ -61,14 +62,15 @@ namespace Players
 
         private IEnumerator RefreshBar()
         {
-            float elapsedTime = 0f;
+            float elapsedTime = 0;
+            float target = 0;
             float speed = _currentFill / _duration;
             
             while (elapsedTime < _duration)
             {
                 elapsedTime += Time.deltaTime;
                 
-                _currentFill = Mathf.MoveTowards(_currentFill, 0, speed * Time.deltaTime);
+                _currentFill = Mathf.MoveTowards(_currentFill, target, speed * Time.deltaTime);
                 
                 ApplyVampirism(_currentFill);
                 FillChanged?.Invoke(_currentFill);
@@ -84,10 +86,10 @@ namespace Players
         {
             if (_enemy != null)
             {
-                float rario = 0.25f;
+                impact *= _ratio;
                 
-                _enemy.TakeDamage(impact * rario);
-                _player.Heal(impact * rario);
+                _enemy.TakeDamage(impact);
+                _player.Heal(impact);
             }
         }
     }
