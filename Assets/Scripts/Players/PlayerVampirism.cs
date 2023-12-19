@@ -9,26 +9,26 @@ namespace Players
     [RequireComponent(typeof(PlayerVampirismBar))]
     public class PlayerVampirism : MonoBehaviour
     {
-        [SerializeField] private float _durationVampirism = 6.0f;
-        [SerializeField] private PlayerVampirismBar _playerVampirismBar;
+        [SerializeField] private float _duration = 6.0f;
+        [SerializeField] private PlayerVampirismBar _bar;
 
         private Player _player;
         private Enemy _enemy;
-        private float _currentFillVampirismBar;
-        private Coroutine _coroutinePlayerVampirism;
+        private float _currentFill;
+        private Coroutine _coroutineVampirism;
         
         public event Action<float> Vampired;
 
         private void OnValidate()
         {
-            if (_playerVampirismBar == null)
-                _playerVampirismBar = GetComponent<PlayerVampirismBar>();
+            if (_bar == null)
+                _bar = GetComponent<PlayerVampirismBar>();
         }
 
         private void OnDestroy()
         {
-            if (_coroutinePlayerVampirism != null)
-                StopCoroutine(_coroutinePlayerVampirism);
+            if (_coroutineVampirism != null)
+                StopCoroutine(_coroutineVampirism);
         }
 
         public void SetTarget(Enemy enemy, Player player)
@@ -46,38 +46,38 @@ namespace Players
 
         public void StartVampirism()
         {
-            _playerVampirismBar.SetActive();
+            _bar.SetActive();
             
-            _currentFillVampirismBar = _playerVampirismBar.GetCurrentFillVampirismBar();
+            _currentFill = _bar.GetCurrentFillVampirismBar();
             
-            if (_coroutinePlayerVampirism == null)
-                _coroutinePlayerVampirism = StartCoroutine(RefreshVampirismBar());
+            if (_coroutineVampirism == null)
+                _coroutineVampirism = StartCoroutine(RefreshBar());
         }
 
         private void StopVampirism()
         {
-            if (_coroutinePlayerVampirism != null)
+            if (_coroutineVampirism != null)
             {
-                StopCoroutine(_coroutinePlayerVampirism);
-                _coroutinePlayerVampirism = null;
+                StopCoroutine(_coroutineVampirism);
+                _coroutineVampirism = null;
             }
 
-            _playerVampirismBar.SetInactive();
+            _bar.SetInactive();
         }
 
-        private IEnumerator RefreshVampirismBar()
+        private IEnumerator RefreshBar()
         {
             float elapsedTime = 0f;
-            float speed = _currentFillVampirismBar / _durationVampirism;
+            float speed = _currentFill / _duration;
             
-            while (elapsedTime < _durationVampirism)
+            while (elapsedTime < _duration)
             {
                 elapsedTime += Time.deltaTime;
                 
-                _currentFillVampirismBar = Mathf.MoveTowards(_currentFillVampirismBar, 0, speed * Time.deltaTime);
+                _currentFill = Mathf.MoveTowards(_currentFill, 0, speed * Time.deltaTime);
                 
-                ApplyVampirism(_currentFillVampirismBar);
-                Vampired?.Invoke(_currentFillVampirismBar);
+                ApplyVampirism(_currentFill);
+                Vampired?.Invoke(_currentFill);
                 
                 yield return null;
             }
