@@ -265,6 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4815747661997709646}
   - component: {fileID: 6606954919588331474}
+  - component: {fileID: 2779794435160386608}
   - component: {fileID: 6945356204057536768}
   - component: {fileID: 4214112217784846926}
   - component: {fileID: 7980952998936678662}
@@ -308,6 +309,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerVampirismButton: {fileID: 7716896558892740317}
+  _playerVampirism: {fileID: 0}
+--- !u!114 &2779794435160386608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8115290766537412698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67180e62879c14baf8d5f81a0523a6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backgroundBar: {fileID: 0}
+  _fillBar: {fileID: 0}
   _playerVampirism: {fileID: 0}
 --- !u!223 &6945356204057536768
 Canvas:
