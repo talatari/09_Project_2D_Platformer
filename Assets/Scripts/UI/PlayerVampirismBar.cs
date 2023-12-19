@@ -9,7 +9,7 @@ namespace UI
         [SerializeField] private SpriteRenderer _fillBar;
         [SerializeField] private PlayerVampirism _playerVampirism;
         
-        private Vector3 _startFillVampirismBar;
+        private Vector3 _startFillBar;
         
         private void OnValidate()
         {
@@ -22,7 +22,8 @@ namespace UI
             _playerVampirism.FillChanged += OnRefreshPlayerVampirismBar;
             _playerVampirism.VampireActivated += OnSetActive;
             _playerVampirism.VampireDeactivated += OnSetInactive;
-            _startFillVampirismBar = _fillBar.transform.localScale;
+            
+            _startFillBar = _fillBar.transform.localScale;
         }
 
         private void OnDestroy()
@@ -37,12 +38,12 @@ namespace UI
             _backgroundBar.enabled = true;
             _fillBar.enabled = true;
             
-            _playerVampirism.SetCurrentFill(_startFillVampirismBar.x);
+            _playerVampirism.SetCurrentFill(_startFillBar.x);
         }
 
         private void OnSetInactive()
         {
-            _fillBar.transform.localScale = _startFillVampirismBar;
+            _fillBar.transform.localScale = _startFillBar;
             _backgroundBar.enabled = false;
             _fillBar.enabled = false;
         }
