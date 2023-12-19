@@ -205,8 +205,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771057694739476282}
+  - component: {fileID: 8067660313991958330}
   m_Layer: 0
-  m_Name: PlayerVampirismBar
+  m_Name: PlayerVampirismBar+
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,6 +229,21 @@ Transform:
   - {fileID: 5722836361890775409}
   m_Father: {fileID: 6902751967863519054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8067660313991958330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725911094538654168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67180e62879c14baf8d5f81a0523a6fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backgroundBar: {fileID: 3625827620090564669}
+  _fillBar: {fileID: 1269009865619475839}
+  _playerVampirism: {fileID: 8548657357484157858}
 --- !u!1 &2229891024985086329
 GameObject:
   m_ObjectHideFlags: 0
