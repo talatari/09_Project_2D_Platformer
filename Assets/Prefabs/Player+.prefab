@@ -39,7 +39,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251834600675688683}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -211,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &771057694739476282
 Transform:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6226738994144589339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -498,7 +498,6 @@ GameObject:
   - component: {fileID: 845232351773124123}
   - component: {fileID: 4567037418333851524}
   - component: {fileID: 8548657357484157858}
-  - component: {fileID: 5993128447638248651}
   - component: {fileID: 5204303509718675577}
   - component: {fileID: 2670774931889276236}
   m_Layer: 0
@@ -609,7 +608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
-  _jumpForce: 12
+  _jumpForce: 1250
 --- !u!114 &845232351773124123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,22 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e049f516e23944d5a8789df7f1a39109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _durationVampirism: 6
-  _playerVampirismBar: {fileID: 5993128447638248651}
---- !u!114 &5993128447638248651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7332351833803817105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67180e62879c14baf8d5f81a0523a6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fillBar: {fileID: 1269009865619475839}
-  _playerVampirismBar: {fileID: 1725911094538654168}
+  _duration: 6
 --- !u!50 &5204303509718675577
 Rigidbody2D:
   serializedVersion: 4
