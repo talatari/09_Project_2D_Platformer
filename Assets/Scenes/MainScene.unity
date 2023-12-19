@@ -1001,30 +1001,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8115290766537412698, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1547392636236409885}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
---- !u!1 &1547392636236409884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8115290766537412698, guid: 9c0801a9e11324a01b695ef0aaf25671, type: 3}
-  m_PrefabInstance: {fileID: 1547392636236409883}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1547392636236409885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547392636236409884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67180e62879c14baf8d5f81a0523a6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _backgroundBar: {fileID: 4283578505096178645}
-  _fillBar: {fileID: 4283578505096178644}
 --- !u!1001 &4283578505096178643
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1033,18 +1011,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 821322938}
     m_Modifications:
-    - target: {fileID: 1269009865619475839, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1725911094538654168, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: m_Name
-      value: PlayerVampirismBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625827620090564669, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6902751967863519054, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.61
@@ -1089,25 +1055,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player+
       objectReference: {fileID: 0}
-    - target: {fileID: 8548657357484157858, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-      propertyPath: _bar
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
---- !u!212 &4283578505096178644 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1269009865619475839, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-  m_PrefabInstance: {fileID: 4283578505096178643}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4283578505096178645 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 3625827620090564669, guid: 92aef49caafa74eeab01e37d653f9251, type: 3}
-  m_PrefabInstance: {fileID: 4283578505096178643}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6690738018035030525
 PrefabInstance:
   m_ObjectHideFlags: 0
